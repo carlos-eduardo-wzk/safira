@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 
 	<build>
-		<finalName>casadocodigo</finalName>
+		<finalName>ROOT</finalName>
 	</build>
 
 	<properties>
