@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login</title>
+
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="dummy" />
+		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
+	</f:metadata>
+
+
+	<div id="cabecLogin">
+		<table style="width: 100%">
+			<tr>
+				<td
+					style="font-size: 36px; color: white; background-color: #545454; text-align: center; font-weight: bold;">
+					
+					<div style="float: left">
+						<h:link outcome="/home">
+							<h:graphicImage library="images" name="logo-safira.png" />
+						</h:link>
+					</div>
+					
+					</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="login-dialog">
+		<h1>Login</h1>
+
+		<h:form prependId="false">
+
+
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<h:panelGrid columns="2" styleClass="grid-login"
+				style="text-align: right">
+
+				<p:outputLabel value="Empregador ID"
+					style="display:block;width:100px;font-weight:bold" />
+				<p:inputText size="40" id="ten" value="#{loginBean.empresaId}"
+					required="true" requiredMessage="Fornecer código empregador" />
+
+				<p:outputLabel value="Email"
+					style="display:block;width:100px;font-weight:bold" />
+				<p:inputText size="40" id="j_username" value="#{loginBean.username}"
+					required="true" requiredMessage="Fornecer email" />
+
+				<h:outputLabel value="Senha"
+					style="display:block;width:100px;font-weight:bold" />
+				<p:password size="40" id="j_password" value="#{loginBean.password}"
+					required="true" requiredMessage="Fornecer senha" />
+
+				<br />
+				<br />
+
+				<p:commandButton type="submit" id="login"
+					action="#{loginBean.doLogin}" value="Entrar" ajax="false"
+					style="display:block;width:100px;font-weight:bold" />
+
+				<f:facet name="footer" >
+					<p:row >
+						<p:column colspan="2"  >
+							<h:link outcome="/esqueciSenha" >esqueci minha senha</h:link>					
+						</p:column>
+					</p:row>
+				</f:facet>		
+			</h:panelGrid>
+
+
+		</h:form>
+
+
+	</div>
+</h:body>
+</html>

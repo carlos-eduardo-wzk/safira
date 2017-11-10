@@ -1,0 +1,288 @@
+@charset "utf-8";
+
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+	background-color: #fff;
+	overflow-x: hidden;
+}
+
+header {
+	padding: 5px 0px;
+	margin-bottom: 0px;
+	height: 30px;
+	background-color: #545454;
+	color: #fff;
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+header>div {
+	margin-left: 8px
+}
+
+#conteudo {
+	padding: 0px 8px
+}
+
+footer {
+	padding: 0px 8px;
+	margin-bottom: 10px
+}
+
+h1 {
+	font-size: 18px;
+	font-weight: 500;
+	padding: 0px;
+	margin: 0px
+}
+
+#login-dialog {
+	clear: both;
+	float: right;
+	margin-right: 230px;
+	width: 190px;
+	margin-top: 5px;
+}
+
+.grid-login {
+	background-color: #e6ffb3;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	margin-top: 8px;
+	padding: 10px;
+}
+
+.ajax-status {
+	position: absolute;
+	top: 10%;
+	left: 50%;;
+	width: 33px;
+	height: 33px
+}
+
+.ui-carousel, .ui-carousel-header, .ui-carousel-header-title,
+	.ui-carousel-page-links, .ui-carousel-page-link, .ui-carousel-item {
+	border: none !important;
+	border-radius: 8px;
+	padding: 20px; margin 0px;
+	background: #003366;
+}
+
+#cadastro {
+	clear: both;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	width: 390px;
+	height: 33px;
+	float: right;
+	margin-right: 28px;
+	margin-top: 10px;
+}
+
+#text01 {
+	width: 760px;
+	margin: 0 auto;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+}
+
+#centro {
+	width: 90%;
+	margin: 0 auto !important;
+	border: 1px solid #333;
+	background-color: blue;
+}
+
+#imgpos {
+	position: absolute;
+	left: 13%;
+	top: 8%
+}
+
+.ui-dialog {
+	border-radius: 10px;
+}
+
+.rotuloCampo {
+	font-weight: bold;
+}
+
+#corpo {
+	margin-right: auto;
+	width: 80%;
+	background-color: #00cc44;
+}
+
+#posskype {
+	position: absolute;
+	left: 80%;
+	top: 4%;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+#imgpos {
+	position: absolute;
+	left: 17%;
+	top: 20%;
+	color: #125b80;
+}
+
+
+#imgposandroid{
+	position: absolute;
+	left: 83%;
+	top: 92%;
+	color: #125b80;
+}
+
+
+#passo {
+	position: absolute;
+	left: 35%;
+	top: 70%;
+}
+
+#esquerdotopo {
+	position: absolute;
+	left: 1%;
+	top: 30%;
+	background-color: #BDBDBD;
+	border-radius: 6px;
+	margin-left: 5px;
+	padding: 0px;
+	position: absolute;
+	top: 530px;
+	left: 20;
+}
+
+#cabplano {
+	color: #fff;
+	background: #125b80;
+	border-radius: 6px 6px 0px 0px;
+	padding-top: 5px;
+	padding-bottom: 15px;
+	font-size: x-large;
+	height: 66%;
+}
+
+#esquerdotopo div p {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	line-height: 50px;
+	text-decoration: none;
+	color: white;
+	font-size: 26px;
+	font-size: 1.625rem;
+	background-color: black;
+}
+
+#divredondo {
+	border-radius: 25px;
+	border: 2px solid #73AD21;
+	padding: 20px;
+	width: 200px;
+	height: 150px;
+}
+
+#preco {
+	text-align: center;
+	font-size: 26px;
+	font-size: 1.625rem;
+	font-weight: bold;
+	padding-top: 4px;
+}
+
+#esquerdotopo3 {
+	position: absolute;
+	left: 30%;
+	top: 30%;
+	background-color: #BDBDBD;
+	border-radius: 6px;
+	margin-left: 5px;
+	padding: 0px;
+	position: absolute;
+	top: 530px;
+	left: 280px;
+}
+
+#cabplano3 {
+	color: #fff;
+	background: #125b80;
+	border-radius: 6px 6px 0px 0px;
+	padding-top: 5px;
+	padding-bottom: 15px;
+	font-size: x-large;
+	height: 66%;
+}
+
+#esquerdotopo3 div p {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	line-height: 50px;
+	text-decoration: none;
+	color: white;
+	font-size: 26px;
+	font-size: 1.625rem;
+	background-color: black;
+}
+
+#preco3 {
+	text-align: center;
+	font-size: 26px;
+	font-size: 1.625rem;
+	font-weight: bold;
+	padding-top: 4px;
+}
+
+#header2 p {
+	text-align: left;
+	font-size: 36px;
+	font-size: 1.625rem;
+	padding-top: 20px;
+	color: white;
+	margin-left: 10px;
+	margin-top: 1px;
+	vertical-align: center;
+}
+
+#carroudiv {	
+
+}
+
+	
+#perguntas{	
+	position: absolute;
+	width:95%;
+	left: 2%;
+	top: 105%;
+  
+}
+
+.ui-accordion .ui-accordion-header {
+	    background-color: white;
+	    color: black;
+	    font-size: 36px;
+	    font-size: 1.0rem;
+	    font-style: normal;	    
+}
+
+
+.ui-carousel .ui-carousel-header  .ui-carousel-header-title {
+	 background-color: #125b80;
+}
+
+.ui-carousel .ui-carousel-header  {
+	 background-color: #125b80;
+}

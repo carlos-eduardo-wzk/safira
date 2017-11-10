@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Esqueci a senha</title>
+
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+<h:body>
+
+
+	<div id="cabecLogin">
+
+
+		<table style="width: 100%">
+			<tr>
+				<td
+					style="font-size: 36px; color: white; background-color: #545454; text-align: center; font-weight: bold;">
+					<div style="float: left">
+						<h:link outcome="/home">
+							<h:graphicImage library="images" name="logo-algaworks.png" />
+						</h:link>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="login-dialog">
+		<h1>Recuperação de senha</h1>
+
+		<p:messages id="messages" autoUpdate="true" closable="true" showDetail="true" />
+
+
+		<h:form prependId="false">
+
+	
+			<h:panelGrid columns="2" styleClass="grid-login"
+				style="text-align: right">
+
+				<p:outputLabel value="Email"
+					style="display:block;width:50px;font-weight:bold" />
+				<p:inputText size="60" id="email" value="#{esqueciSenhaBean.email}"
+					required="true" requiredMessage="Fornecer email"
+					placeholder="digite seu email que foi cadastrado no sistema" />
+
+				<br />
+				<br />
+
+				<p:commandButton type="submit" id="envia"
+					action="#{esqueciSenhaBean.enviarSenhaRecuperada()}" value="Enviar"
+					ajax="false" style="display:block;width:100px;font-weight:bold">
+				</p:commandButton>
+
+			</h:panelGrid>
+
+		</h:form>
+
+
+
+
+	</div>
+</h:body>
+</html>

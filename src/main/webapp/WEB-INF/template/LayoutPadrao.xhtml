@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="shortcut icon"
+		href="#{facesContext.externalContext.request.contextPath}/resources/images/favicon.ico"
+		title="Favicon" />
+	<title><ui:insert name="titulo">Safira</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+
+	<script>
+		PrimeFaces.locales['pt'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+	</script>
+
+</h:head>
+
+<h:body>
+	<f:facet name="start">
+		<h:graphicImage library="images" name="loading.gif" />
+	</f:facet>
+	<f:facet name="complete">
+		<h:outputText name="" />
+	</f:facet>
+
+
+	<header>
+	<div style="float: left">
+		<h:link>
+			<h:graphicImage library="images" name="logo-safira.png" />
+		</h:link>
+	</div>
+
+	<div style="float: right; margin-right: 300px">
+		<span
+			style="float: left; height: 30px; line-height: 30px; margin-right: 60px">
+			Olá #{seguranca.nomeUsuario} </span>
+
+		<h:form style="display: inline-block">
+			<p:menubar styleClass="menu-sistema">
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Colaboradores" />
+					<p:separator />
+					<p:submenu label="Organização">
+						<p:menuitem value="Cargo" />
+						<p:menuitem value="Departamento" />
+						<p:menuitem value="Filial" />
+						<p:menuitem value="Empresa" />
+
+					</p:submenu>
+					<p:submenu label="Horário">
+						<p:menuitem value="Jornada" />
+						<p:menuitem value="Horário" />
+						<p:menuitem value="Banco de horas" />
+						<p:menuitem value="Horário avulso" />
+					</p:submenu>
+					<p:submenu label="Geral">
+						<p:menuitem value="Feriado" />
+						<p:menuitem value="Motivo abono" />
+						<p:menuitem value="Motivo afastamento" />
+						<p:menuitem value="Histórico" />
+						<p:menuitem value="Relógio" />
+
+					</p:submenu>
+					<p:submenu label="Sindicatos">
+						<p:menuitem value="Norma" />
+						<p:separator />
+						<p:menuitem value="Eventos folhas" />
+						<p:menuitem value="Tipos de Ocorrência" />
+
+					</p:submenu>
+					<p:submenu label="Importação">
+						<p:menuitem value="Colaborador" />
+					</p:submenu>
+
+
+					<p:separator />
+					<p:menuitem value="Usuários" />
+
+				</p:submenu>
+
+
+				<p:submenu label="Processamento">
+					<p:menuitem value="Acerto" />
+					<p:menuitem value="Afastamento" />
+					<p:menuitem value="Folga" />
+					<p:menuitem value="Importação AFD" />
+				</p:submenu>
+
+				<p:submenu label="Consulta">
+					<p:menuitem value="Marcações do dia" />
+				</p:submenu>
+
+
+				<p:submenu label="Impressão">
+					<p:submenu value="Relatórios" label="Relatórios">
+						<p:menuitem value="Espelho" />
+						<p:menuitem value="Faltas" />
+						<p:menuitem value="Abonos" />
+
+					</p:submenu>
+					<p:submenu value="Listagem" label="Listagens">
+						<p:menuitem value="Colaboradores" />
+						<p:menuitem value="Presentes no dia" />
+
+					</p:submenu>
+
+					<p:submenu value="Exportação arquivos fiscais" label="Listagens">
+						<p:menuitem value="AFDT" />
+						<p:menuitem value="ACJEF" />
+						<p:menuitem value="Similar AFD" />
+
+					</p:submenu>
+
+				</p:submenu>
+				<p:menuitem value="Sobre" onclick="PF('sobre').show()" />
+				<p:menuitem value="Sair" url="/j_spring_security_logout" />
+			</p:menubar>
+		</h:form>
+
+
+		<p:dialog header="Sobre" widgetVar="sobre" minHeight="40" height="50"
+			width="150px" showEffect="clip" hideEffect="clip">
+			<h:outputText value="Versão 1.0" />
+			<br />
+			<h:outputText value="Data 01/01/2017" />
+		</p:dialog>
+
+	</div>
+	<div style="clear: both"></div>
+	</header>
+
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+
+	<p:separator style="margin-top: 10px" />
+
+	<footer> Sistema Safira - controle de ponto nas nuvens -
+	versão 1.0</footer>
+
+
+</h:body>
+
+</html>
