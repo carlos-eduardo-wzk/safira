@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 
 	<build>
-		<finalName>ROOT</finalName>
+		<finalName>casadocodigo</finalName>
 	</build>
 
 	<properties>
@@ -76,6 +76,12 @@
 			<artifactId>jsr250-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901.jdbc4</version>			
+            <scope>compile</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -94,4 +100,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	
 </project>
