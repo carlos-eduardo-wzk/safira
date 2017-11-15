@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+
+<h:head>
+
+</h:head>		
+<h:body>
+	<h:form>
+		
+		<h2 class="first">Popup</h2>
+           
+           <p:inputText value="#{livroMB.product.title}"  />
+           <p:calendar id="assa" value="#{livroMB.dt}" pattern="MM/dd/yyyy"/>
+
+
+       <p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{livroMB.save}" title="grava o depto no banco de dados"/>
+       </h:form>
+</h:body>
+</html>  
