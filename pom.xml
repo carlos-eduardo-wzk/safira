@@ -59,24 +59,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-
-
-
-		<!-- https://mvnrepository.com/artifact/javax.transaction/javax.transaction-api -->
-		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>javax.transaction-api</artifactId>
-			<version>1.2</version>
-		</dependency>
-
-
-
 
 		<dependency>
 			<groupId>org.jboss.spec.javax.faces</groupId>

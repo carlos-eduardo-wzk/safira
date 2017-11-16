@@ -8,6 +8,8 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+
+
 import model.Livro;
 
 @Model
