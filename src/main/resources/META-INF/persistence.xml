@@ -8,8 +8,7 @@
         <jta-data-source>java:jboss/datasources/PostgreSQLDS</jta-data-source>                         
         <class>com.todo.domain.Todo</class>
         <properties>
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            
         </properties>
  
     </persistence-unit>
