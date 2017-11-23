@@ -21,7 +21,7 @@ public class LivroMB {
 	private BookDAO bookDAO;
 	
 	
-	@Transactional
+
 	public void save() {
 		System.out.println("salvar libro " + getProduct().getTitle());
 		bookDAO.save(product);
