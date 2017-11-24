@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-
+import javax.transaction.Transactional;
 
 import model.Livro;
 
@@ -20,7 +20,7 @@ public class LivroMB {
 	@Inject
 	private BookDAO bookDAO;
 	
-
+    @Transactional
 	public void save() {
 		System.out.println("salvar libro " + getProduct().getTitle());
 		bookDAO.save(product);
