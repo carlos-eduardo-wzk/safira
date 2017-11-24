@@ -7,7 +7,10 @@
 
 <!--         <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
 
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<!--         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
+        
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        
         <jta-data-source>java:jboss/datasources/PostgreSQLDS</jta-data-source>                         
         
         <class>com.todo.domain.Todo</class>
@@ -15,7 +18,7 @@
         <properties>
             
 
-			<property name="hibernate.transaction.coordinator_class" value="jta" />
+<!-- 			<property name="hibernate.transaction.coordinator_class" value="jta" /> -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.format_sql" value="TRUE" />
 			<property name="hibernate.show_sql" value="true" />
