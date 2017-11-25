@@ -1,8 +1,8 @@
 package Controle;
 
-import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import model.Livro;
 
@@ -11,7 +11,7 @@ public class BookDAO {
 	@PersistenceContext(unitName = "safiraPU")
 	private EntityManager manager;
 
-	@TransactionAttribute
+	@Transactional
 	public void salva(Livro livro) {
 
 		manager.persist(livro);
