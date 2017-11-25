@@ -13,9 +13,9 @@ public class BookDAO {
 
 	public void save(Livro product) {
 
-		manager.getTransaction().begin();
+		
 		manager.persist(product);
-		manager.getTransaction().commit();
+		manager.flush();
         
 	}
 
