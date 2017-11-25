@@ -1,12 +1,9 @@
 package Controle;
 
-
-
 import java.util.Date;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import model.Livro;
 
@@ -14,17 +11,16 @@ import model.Livro;
 public class LivroMB {
 
 	private Date dt;
-	
+
 	private Livro product = new Livro();
-	
+
 	@Inject
 	private BookDAO bookDAO;
-	
-    @Transactional
+
 	public void save() {
 		System.out.println("salvar libro " + getProduct().getTitle());
 		bookDAO.save(product);
-		
+
 	}
 
 	public Livro getProduct() {
@@ -43,7 +39,4 @@ public class LivroMB {
 		this.dt = dt;
 	}
 
-
-
-	
 }
