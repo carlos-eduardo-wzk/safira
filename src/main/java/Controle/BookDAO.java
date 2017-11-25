@@ -1,24 +1,29 @@
 package Controle;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import model.Livro;
 
-@Stateful
+@Stateless
 public class BookDAO {
 
 	@PersistenceContext(unitName = "safiraPU")
-	private EntityManager manager;
-	
 
-	@Transactional
+	private EntityManager em;
+
 	public void salva(Livro livro) {
 
-		manager.persist(livro);
-		manager.flush();
+		System.out.println("salva livro dentro com persist " + livro.getTitle());
+
+		try {
+			em.persist(livro);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
