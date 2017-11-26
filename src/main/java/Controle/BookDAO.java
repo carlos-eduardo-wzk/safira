@@ -1,4 +1,4 @@
-package Controle;
+package controle;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

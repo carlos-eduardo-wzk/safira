@@ -8,6 +8,10 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>java:jboss/datasources/PostgreSQLDS</jta-data-source>
         <class>model.Livro</class>
+        <class>model.Cargo</class>
+        
+       
+        
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
