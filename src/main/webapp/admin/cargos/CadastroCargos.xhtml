@@ -1,0 +1,64 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">#{CadastroCargoBean.editando ? 'Edição cargo' : 'Novo cargo'} </ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frm">
+
+
+			<p:outputLabel
+				value="#{cadastroCargoBean.editando ? 'Edição cargo' : 'Novo cargo'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<p:focus />
+
+			<f:metadata>
+				<o:viewParam name="cargo" value="#{cadastroCargoBean.cargo}" />
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/admin/cargos/CadastroCargos" />
+					<p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{cadastroCargoBean.salvar}"
+						title="grava o cargo no banco de dados" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/admin/cargos/PesquisaCargos"
+						title="volta para a tela de pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+			
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 10px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Nome do cargo" for="cargo"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroCargoBean.cargo.cargo}" id="cargo"
+					maxlength="60" size="60" required="true" requiredMessage="Nome do cargo obrigatório"
+					placeholder="digite aqui o nome do cargo"/>
+
+				<p:outputLabel value="CBO" for="cbo" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroCargoBean.cargo.CBO}" id="cbo" />
+
+
+			</p:panelGrid>
+
+
+		</h:form>
+
+
+
+	</ui:define>
+
+</ui:composition>

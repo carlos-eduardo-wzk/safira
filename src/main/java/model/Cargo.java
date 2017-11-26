@@ -2,32 +2,54 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Cargo implements Serializable {
 
-	private static final long serialVersionUID = 4700284130933106702L;
-	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private static final long serialVersionUID = 1L;
 
-	public Integer getId() {
-		return id;
+	@Id
+	@GeneratedValue
+	private Long Id;
+	@Column(nullable = false, length = 80)
+	private String cargo;
+
+	@Column(nullable = false, length = 20)
+	private String CBO;
+
+	public String getCBO() {
+		return CBO;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCBO(String cBO) {
+		CBO = cBO;
+	}
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo.toUpperCase();
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
 		return result;
 	}
 
@@ -40,15 +62,12 @@ public class Cargo implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Cargo other = (Cargo) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (Id == null) {
+			if (other.Id != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!Id.equals(other.Id))
 			return false;
 		return true;
 	}
-	
-	
 
-	
 }

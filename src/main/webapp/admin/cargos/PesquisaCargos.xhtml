@@ -23,7 +23,7 @@
 						title="pesquisa pela nome do cargo"/>
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:button value="Novo" 
+					<p:button value="Novo"  outcome="/admin/cargos/CadastroCargos" 
 					title="tela de cadastramento" />
 				</p:toolbarGroup>
 			</p:toolbar>
@@ -51,10 +51,11 @@
 				</p:column>
 
 				<p:column style="width: 100px; text-align: center" headerText="Ação">
-					<p:button outcome="/admin/cargos/CadastroCargos"
+					<p:button outcome="/admin/cargos/CadastroCargos" 
 						icon="ui-icon-pencil" title="Editar">
 						<f:param name="cargo" value="#{cargo.id}" />
 					</p:button>
+					
 
 
 					<p:commandButton icon="ui-icon-trash" title="Excluir"

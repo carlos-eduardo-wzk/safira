@@ -40,7 +40,7 @@ public class PesquisaCargoBean implements Serializable {
 	public void excluir(){
 		cargos.remover(cargoSelecionado);
 		cargoFiltrados.remove(cargoSelecionado);
-//		FacesUtil.addInfoMessage("Cargo " + cargoSelecionado.getCargo() + "excluido.");		
+		FacesUtil.addInfoMessage("Cargo " + cargoSelecionado.getCargo() + "excluido.");		
 				
 	}
 	
