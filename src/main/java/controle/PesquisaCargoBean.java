@@ -31,7 +31,6 @@ public class PesquisaCargoBean implements Serializable {
 	};
 
 	public void pesquisar(){
-		System.out.println("antes da pesqisa");
 		cargoFiltrados = cargos.filtrados(filtro);
 		System.out.println(" deposi de filtradas");
 				

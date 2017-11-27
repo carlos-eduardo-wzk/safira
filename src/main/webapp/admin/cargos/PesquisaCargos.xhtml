@@ -50,10 +50,11 @@
 					<h:outputText value="#{cargo.cargo}" />
 				</p:column>
 
-				<p:column style="width: 100px; text-align: center" headerText="Ação">
+				<p:column style="width: 100px; text-align: center" headerText="Ação" >
 					<p:button outcome="/admin/cargos/CadastroCargos" 
 						icon="ui-icon-pencil" title="Editar">
 						<f:param name="cargo" value="#{cargo.id}" />
+						
 					</p:button>
 					
 

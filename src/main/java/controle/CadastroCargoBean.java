@@ -2,15 +2,15 @@ package controle;
 
 import java.io.Serializable;
 
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import model.Cargo;
 import service.CadastroCargoService;
 import util.jsf.FacesUtil;
 
-@Named
+@ManagedBean()
 @ViewScoped
 public class CadastroCargoBean implements Serializable{
 
@@ -34,6 +34,12 @@ public class CadastroCargoBean implements Serializable{
 
 	
    public void salvar(){	  
+	   if (cargo.getId() == null) {
+	   }
+	   else {
+		   cadastroServiceCargo.achaCargo(cargo);
+	   }
+	   
 	   cadastroServiceCargo.salvar(cargo);
 	   FacesUtil.addInfoMessage("Cadastrado com sucesso");
    }

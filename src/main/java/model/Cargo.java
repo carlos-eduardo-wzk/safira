@@ -53,6 +53,14 @@ public class Cargo implements Serializable {
 		return result;
 	}
 
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Cargo [Id=" + Id + ", cargo=" + cargo + ", CBO=" + CBO + "]";
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -19,7 +19,7 @@
 			<p:focus />
 
 			<f:metadata>
-				<o:viewParam name="cargo" value="#{cadastroCargoBean.cargo}" />
+				<o:viewParam name="cargo" value="#{cadastroCargoBean.cargo}"  converter="#{cargoConverter}" />
 			</f:metadata>
 
 			<p:messages autoUpdate="true" closable="true" />
@@ -50,6 +50,10 @@
 
 				<p:outputLabel value="CBO" for="cbo" styleClass="rotuloCampo" />
 				<p:inputText value="#{cadastroCargoBean.cargo.CBO}" id="cbo" />
+				
+					<p:outputLabel value="id" for="cbo" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroCargoBean.cargo.id}" id="id" />
+				
 
 
 			</p:panelGrid>
