@@ -1,0 +1,104 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">#{CadastroEmpresaBean.editando ? 'Edição empresa' : 'Novo empresa'} </ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frm">
+			<p:outputLabel
+				value="#{cadastroEmpresaBean.editando ? 'Edição empresa' : 'Novo empresa'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<p:focus />
+
+			<f:metadata>
+				<o:viewParam name="empresa" value="#{cadastroEmpresaBean.empresa}" converter="#{empresaConverter}" />
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/admin/empresas/CadastroEmpresas" />
+					<p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{cadastroEmpresaBean.salvar}" title="grava o empresa no banco de dados" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/admin/empresas/PesquisaEmpresas" title="volta para a tela de pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+			
+			<p:panelGrid columns="2" columnClasses="rotulo campo" style="width: 98%;margin-left:15px">
+			
+				<p:outputLabel value="Nome do empresa" for="empresa"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroEmpresaBean.empresa.razaoSocial}"
+					id="empresa" maxlength="60" size="60" placeholder="Razão social" 
+					required="true" requiredMessage="nome da empresa obrigatório"/>
+
+				<p:outputLabel value="Fantasia" for="fantasia"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroEmpresaBean.empresa.fantasia}"
+					id="fantasia" maxlength="60" size="60" />
+
+				<p:outputLabel value="CNPJ" for="cnpj" styleClass="rotuloCampo" />
+				<p:inputMask value="#{cadastroEmpresaBean.empresa.cnpj}" id="cnpj"
+					mask="99.999.999/9999-99" size="25" required="true"/>
+
+				<p:outputLabel value="CNAE" for="cnai" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroEmpresaBean.empresa.cnai}" id="cnai"
+					maxlength="60" size="60"
+					placeholder="Classificação Nacional de Atividades Econômicas-Fiscal" />
+
+				<p:outputLabel value="Atividade" for="atividade"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroEmpresaBean.empresa.atividade}"
+					id="atividade" maxlength="60" size="60" />
+
+			</p:panelGrid>
+
+			<p:fieldset id="endfield" legend="Endereço" toggleable="true"
+				collapsed="true" style="margin-left:15px; margin-top:5px;">
+
+				<p:panelGrid columns="2"
+					columnClasses="rotulo campo" style="width: 99%">
+
+					<p:outputLabel value="Endereço" styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroEmpresaBean.empresa.endereco}"
+						size="80" />
+					<p:outputLabel value="Bairro" styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroEmpresaBean.empresa.bairro}"
+						size="25" />
+					<p:outputLabel value="Cidade" styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroEmpresaBean.empresa.cidade}"
+						size="25" />
+
+					<p:outputLabel value="UF" for="uf" styleClass="rotuloCampo" />
+					<p:selectOneMenu id="uf" value="#{cadastroEmpresaBean.empresa.uf}"
+						required="false">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{cadastroEmpresaBean.uf}" var="uf"
+							itemValue="#{uf}" itemLabel="#{uf.descricao}" />
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="CEP" styleClass="rotuloCampo" />
+					<p:inputMask value="#{cadastroEmpresaBean.empresa.cep}"
+						size="10" mask="99999-999?9	" />
+				</p:panelGrid>
+			</p:fieldset>
+
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

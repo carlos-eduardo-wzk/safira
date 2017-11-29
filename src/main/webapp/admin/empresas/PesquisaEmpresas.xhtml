@@ -1,0 +1,69 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"    
+	xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pesquisa de cargos</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form id="frmPesquisa">
+	    	<p:outputLabel value="Pesquisa de empresas"
+				style="font-weight:bold;font-size:16px"
+				 />
+	    	<p:focus/>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 1px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Pesquisar" action="#{pesquisaEmpresaBean.pesquisar}" 
+	    				update="@form" title="pesquisa pelo nome da empresa" />
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Novo" outcome="/admin/empresas/CadastroEmpresas" title="tela de cadastramento" 	/>
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 10px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Razão Social" for="empresa" styleClass="rotuloCampo"/>
+	    		<p:inputText id="empresa" size="60"  value="#{pesquisaEmpresaBean.filtro.razaoSocial}" 
+	    		placeholder="digite aqui a empresa que procura"/>
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="empresasTable" value="#{pesquisaEmpresaBean.empresaFiltrados}" var="empresa"
+	    		style="margin-top: 10px" emptyMessage="Nenhuma empresa encontrada." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		
+	    		<p:column headerText="Empresa">
+	    			<h:outputText value="#{empresa.razaoSocial}" />
+	    		</p:column>
+
+	    		<p:column style="width: 100px; text-align: center" headerText="Ação">
+	    			<p:button outcome="/admin/empresas/CadastroEmpresas" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="empresa" value="#{empresa.id}" />
+	    			</p:button>
+	    			
+	    			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisaEmpresaBean.empresaSelecionado}" 
+	    					value="#{empresa}" />
+	    			</p:commandButton>
+	    		</p:column>
+	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog header="Exclusão de empresa" 
+	    		message="Tem certeza que deseja excluir o empresa #{pesquisaEmpresaBean.empresaSelecionado.razaoSocial}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{pesquisaEmpresaBean.excluir}" process="@this"
+	    			update=":frmPesquisa:empresasTable" />
+	    	</p:confirmDialog>
+    	</h:form>
+    </ui:define>
+</ui:composition>

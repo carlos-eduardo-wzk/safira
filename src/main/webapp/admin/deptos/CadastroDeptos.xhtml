@@ -1,0 +1,90 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroDeptoBean.editando ? 'Edição depto' : 'Novo depto'}</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frm">
+
+			<p:focus />
+
+			<p:outputLabel
+				value="#{cadastroCargoBean.editando ? 'Edição depto' : 'Novo depto'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<f:metadata>
+				<o:viewParam name="depto" value="#{cadastroDeptoBean.depto}" converter="#{deptoConverter}" />
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/admin/deptos/CadastroDeptos" />
+					<p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{cadastroDeptoBean.salvar}" title="grava o depto no banco de dados"/>
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/admin/deptos/PesquisaDeptos" title="volta para a tela de pesquisa"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 10px" columnClasses="rotulo, campo">
+
+
+				<p:outputLabel value="Nome do depto" for="depto"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroDeptoBean.depto.depto}" id="depto"
+					maxlength="60" size="60" required="true"
+					requiredMessage="Nome do departamento" />
+
+				<p:outputLabel value="Sigla" for="sigla" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroDeptoBean.depto.sigla}" id="sigla"
+					size="15" maxlength="15" />
+
+				<h:outputText value="Usa endereço no espelho "
+					styleClass="rotuloCampo" />
+				<p:selectBooleanCheckbox
+					value="#{cadastroDeptoBean.depto.impressaoEspelho}">
+				</p:selectBooleanCheckbox>
+
+
+				<p:outputLabel value="Endereço" for="endereco"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroDeptoBean.depto.endereco}"
+					id="endereco" size="80" />
+
+				<p:outputLabel value="Bairro" for="bairro" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroDeptoBean.depto.bairro}" id="bairro"
+					size="25" />
+
+				<p:outputLabel value="Cidade" for="cidade" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroDeptoBean.depto.cidade}" id="cidade"
+					size="25" />
+
+
+				<p:outputLabel value="UF" for="uf" styleClass="rotuloCampo" />
+				<p:selectOneMenu id="uf" value="#{cadastroDeptoBean.depto.uf}"
+					required="true">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{cadastroDeptoBean.uf}" var="uf"
+						itemValue="#{uf}" itemLabel="#{uf.descricao}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="CEP" for="cep" styleClass="rotuloCampo" />
+				<p:inputMask value="#{cadastroDeptoBean.depto.cep}" id="cep"
+					size="10" mask="999.999-99">
+				</p:inputMask>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

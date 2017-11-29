@@ -1,0 +1,117 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="xmlns:o=http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">Novo Usuário	</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frm">
+
+			<p:outputLabel
+				value="#{cadastroUsuarioBean.editando ? 'Edição usuário' : 'Novo usuário'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<f:metadata>
+				<f:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}" converter="#{usuarioConverter}" />
+				<f:event listener="#{cadastroUsuarioBean.inicializar}"
+					type="preRenderView" />
+			</f:metadata>
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/admin/usuarios/CadastroUsuario"
+						update="@form" />
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroUsuarioBean.salvar}" update="@form"
+						title="grava o usuário no banco de dados" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/admin/usuarios/PesquisaUsuario"
+						title="volta para a tela de pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 10px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Usuário" for="nome" styleClass="rotuloCampo"/>
+				<p:inputText id="nome" size="60" maxlength="80"
+					value="#{cadastroUsuarioBean.usuario.nome}"
+					placeholder="digite aqui o nome do usuário" required="true"
+					requiredMessage="Nome do usuário obrigatório" />
+
+				<p:outputLabel value="E-mail" for="email" styleClass="rotuloCampo" />
+				<p:inputText id="email" size="60" maxlength="80"
+					value="#{cadastroUsuarioBean.usuario.email}"
+					placeholder="digite aqui o email que sera usado para ter acesso ao sistema"
+					required="true" requiredMessage="Email obrigatório" />
+
+				<p:outputLabel value="Senha" for="senha" styleClass="rotuloCampo"/>
+				<p:password id="senha" size="20" maxlength="20"
+					value="#{cadastroUsuarioBean.usuario.senha}" redisplay="true"
+					placeholder="senha no minimo 5 digitos" required="true"
+					requiredMessage="Senha obrigatória com no mínimo 5 digitos" />
+
+
+				<p:selectOneMenu id="grupo"
+					value="#{cadastroUsuarioBean.grupoSelecionado}">
+					<f:selectItems value="#{cadastroUsuarioBean.lstGrupos}" var="grupo"
+						itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
+				</p:selectOneMenu>
+
+				<p:commandButton value="Adicionar grupo"
+					action="#{cadastroUsuarioBean.adicionaGrupo}"
+					update=":frm:tabelaGrupos"
+					title="associa o funcionário ao grupo de permissâo">
+				</p:commandButton>
+
+			</p:panelGrid>
+
+
+			<p:dataTable value="#{cadastroUsuarioBean.usuario.grupos}"
+				id="tabelaGrupos" var="grupo" paginatorAlwaysVisible="false"
+				paginator="true"
+				emptyMessage="Nenhum grupo associado ao usuário encontrado"
+				style="margin-top:20px" rows="20">
+				<p:column headerText="grupos" style="width:95%">
+					<h:outputLabel value="#{grupo.nome}" />
+				</p:column>
+
+				<p:column headerText="Ação">
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frm:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{cadastroUsuarioBean.grupoSelecionado}" value="#{grupo}" />
+					</p:commandButton>
+
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de Grupo"
+				message="Tem certeza que deseja excluir o ?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{cadastroUsuarioBean.excluiGrupo}" process="@this"
+					update=":frm:tabelaGrupos" />
+			</p:confirmDialog>
+		</h:form>
+
+
+
+
+	</ui:define>
+
+</ui:composition>

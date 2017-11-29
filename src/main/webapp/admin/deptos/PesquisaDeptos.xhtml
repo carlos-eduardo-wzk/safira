@@ -1,0 +1,70 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"    
+	xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pesquisa de deptos</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form id="frmPesquisa">
+	    	<p:outputLabel value="Pesquisa de departamentos"
+				style="font-weight:bold;font-size:16px"
+				 />
+	    	<p:focus/>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 1px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Pesquisar" action="#{pesquisaDeptoBean.pesquisar}" 
+	    				update="@form" title="pesquisa pelo nome do depto" />
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Novo" outcome="/admin/deptos/CadastroDeptos" title="tela de cadastramento"/>
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 10px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Depto" for="depto" styleClass="rotuloCampo"/>
+	    		<p:inputText id="depto" size="60"  value="#{pesquisaDeptoBean.filtro.depto}"/>
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="deptosTable" value="#{pesquisaDeptoBean.deptoFiltrados}" var="depto"
+	    		style="margin-top: 10px" emptyMessage="Nenhum depto encontrado." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		
+	    		<p:column headerText="Depto">
+	    			<h:outputText value="#{depto.depto}" />
+	    		</p:column>
+
+	    		<p:column style="width: 100px; text-align: center">
+	    			<p:button outcome="/admin/deptos/CadastroDeptos" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="depto" value="#{depto.id}" />
+	    			</p:button>
+	    			
+	    			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisaDeptoBean.deptoSelecionado}" 
+	    					value="#{depto}" />
+	    			</p:commandButton>
+
+	    		</p:column>
+	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog header="Exclusão de depto" 
+	    		message="Tem certeza que deseja excluir o depto #{pesquisaDeptoBean.deptoSelecionado.depto} ?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{pesquisaDeptoBean.excluir}" process="@this"
+	    			update=":frmPesquisa:deptosTable" />
+	    	</p:confirmDialog>
+
+    	</h:form>
+    </ui:define>
+</ui:composition>
