@@ -9,6 +9,10 @@
         <jta-data-source>java:jboss/datasources/PostgreSQLDS</jta-data-source>
         <class>model.Livro</class>
         <class>model.Cargo</class>
+        <class>model.Depto</class>
+        <class>model.Filial</class>
+        <class>model.Grupo</class>
+        <class>model.Usuario</class>
         
        
         

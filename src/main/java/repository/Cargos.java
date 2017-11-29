@@ -22,7 +22,6 @@ public class Cargos implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@PersistenceContext(unitName = "safiraPU")
-
 	private EntityManager em;
 
 	@SuppressWarnings("unchecked")

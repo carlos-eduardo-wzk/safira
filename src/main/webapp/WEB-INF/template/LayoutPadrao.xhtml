@@ -77,9 +77,9 @@
 					<p:separator />
 					<p:submenu label="Organização">
 						<p:menuitem value="Cargo" outcome="/admin/cargos/PesquisaCargos" />
-						<p:menuitem value="Departamento" />
-						<p:menuitem value="Filial" />
-						<p:menuitem value="Empresa" />
+						<p:menuitem value="Departamento" outcome="/admin/deptos/PesquisaDeptos" />
+						<p:menuitem value="Filial" outcome="/admin/filiais/PesquisaFiliais"/>
+						<p:menuitem value="Empresa" outcome="/admin/empresas/PesquisaEmpresas" />
 
 					</p:submenu>
 					<p:submenu label="Horário">
@@ -109,7 +109,7 @@
 
 
 					<p:separator />
-					<p:menuitem value="Usuários" />
+					<p:menuitem value="Usuários" outcome="/admin/usuarios/PesquisaUsuario" />
 
 				</p:submenu>
 

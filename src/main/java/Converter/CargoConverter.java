@@ -1,4 +1,4 @@
-package Converter;
+package converter;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
