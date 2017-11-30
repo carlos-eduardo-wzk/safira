@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import model.Grupo;
 import model.Usuario;
@@ -15,7 +15,7 @@ import service.CadastroUsuarioService;
 import util.jsf.FacesUtil;
 
 
-@Named
+@ManagedBean
 @ViewScoped
 public class CadastroUsuarioBean implements Serializable {
 
@@ -27,13 +27,15 @@ public class CadastroUsuarioBean implements Serializable {
 	private List<Grupo> lstGrupos = new ArrayList<>();
 	private Grupo grupoSelecionado;
 	
-	
+
 	
 	@Inject
 	private CadastroUsuarioService cadastroUsuarioService;
 	
 	@Inject
 	private Grupos repGrupos;
+	
+	
 
 			
 	public CadastroUsuarioBean() {

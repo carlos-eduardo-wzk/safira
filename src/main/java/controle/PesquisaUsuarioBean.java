@@ -3,16 +3,17 @@ package controle;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import filter.UsuarioFilter;
 import model.Usuario;
 import repository.Usuarios;
+import service.CadastroCargoService;
+import service.CadastroUsuarioService;
 import util.jsf.FacesUtil;
-import filter.UsuarioFilter;
-
-
 
 @Named
 @ViewScoped
@@ -74,11 +75,14 @@ public class PesquisaUsuarioBean implements Serializable{
 	}
 
 	public void excluir() {
+		
+		System.out.println("exluir usuario " + usuarioSelecionado);
+		
 		usuarios.remover(usuarioSelecionado);
 		usuarioFiltrados.remove(usuarioSelecionado);
+		FacesUtil.addInfoMessage("Usuario " + usuarioSelecionado.getNome() + "excluido.");		
 		
-		FacesUtil.addInfoMessage("Usuario " + usuarioSelecionado.getNome() 
-				+ " excluído com sucesso.");
+		
 	}
   
 }

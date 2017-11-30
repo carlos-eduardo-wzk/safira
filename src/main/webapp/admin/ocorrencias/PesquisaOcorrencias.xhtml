@@ -1,0 +1,83 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de ocorrencias</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<p:outputLabel value="Pesquisa de ocorrências"
+				style="font-weight:bold;font-size:16px" />
+			<p:focus />
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 1px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaOcorrenciaBean.pesquisar}" update="@form"
+						title="pesquisa pela nome do ocorrências" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo"
+						outcome="/admin/ocorrencias/CadastroOcorrencias"
+						title="tela de cadastramento" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 10px"
+				columnClasses="rotuloCadastro2, campoCadastro2">
+
+				<p:outputLabel value="Ocorrência" for="ocorrencia"
+					styleClass="rotuloCampo" />
+				<p:inputText id="ocorrencia" size="60"
+					value="#{pesquisaOcorrenciaBean.filtro.ocorrencia}" placeholder="digite aqui a ocorrência que procura" />
+			</p:panelGrid>
+
+			<p:dataTable id="ocorrenciasTable"
+				value="#{pesquisaOcorrenciaBean.ocorrenciaFiltrados}"
+				var="ocorrencia" style="margin-top: 10px"
+				emptyMessage="Nenhuma ocorrência encontrada." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+
+				<p:column headerText="Ocorrência">
+					<h:outputText value="#{ocorrencia.ocorrencia}" />
+				</p:column>
+
+				<p:column style="width: 100px; text-align: center" headerText="Ação">
+					<p:button outcome="/admin/ocorrencias/CadastroOcorrencias"
+						icon="ui-icon-pencil" title="Editar">
+						<f:param name="ocorrencia" value="#{ocorrencia.id}" />
+					</p:button>
+
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaOcorrenciaBean.ocorrenciaSelecionado}"
+							value="#{ocorrencia}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de Ocorrencia"
+				message="Tem certeza que deseja excluir o ocorrencia #{pesquisaOcorrenciaBean.ocorrenciaSelecionado.ocorrencia} ?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{pesquisaOcorrenciaBean.excluir}" process="@this"
+					update=":frmPesquisa:ocorrenciasTable" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

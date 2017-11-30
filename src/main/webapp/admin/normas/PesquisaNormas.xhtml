@@ -1,0 +1,71 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"    
+	xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pesquisa de normas</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form id="frmPesquisa">
+	    	<p:outputLabel value="Pesquisa de norma"
+				style="font-weight:bold;font-size:16px"
+				 />
+	    	<p:focus/>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 1px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Pesquisar" action="#{pesquisaNormaBean.pesquisar}" 
+	    				update="@form" 
+	    				title="pesquisa pela nome da norma" />
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Novo" outcome="/admin/normas/CadastroNormas" 
+	    			title="tela de cadastramento" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 10px"
+	    			columnClasses="rotulo, campo">
+	    				    			
+	    		<p:outputLabel value="Norma" for="norma" styleClass="rotuloCampo"/>
+	    		<p:inputText id="norma" size="60"  value="#{pesquisaNormaBean.filtro.norma}"/>
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="normasTable" value="#{pesquisaNormaBean.normaFiltrados}" var="norma"
+	    		style="margin-top: 10px" emptyMessage="Nenhuma Norma encontrada." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	    		
+	    		
+	    		<p:column headerText="Norma">
+	    			<h:outputText value="#{norma.norma}" />
+	    		</p:column>
+
+	    		<p:column style="width: 100px; text-align: center" headerText="Ação">
+	    			<p:button outcome="/admin/normas/CadastroNormas" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="norma" value="#{norma.id}" />
+	    			</p:button>
+	    			
+	    			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisaNormaBean.normaSelecionado}" 
+	    					value="#{norma}" />
+	    			</p:commandButton>
+	    		</p:column>
+	    	</p:dataTable>
+	    	
+	    	<p:confirmDialog header="Exclusão de norma" 
+	    		message="Tem certeza que deseja excluir o norma  #{pesquisaNormaBean.normaSelecionado.norma} "    
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{pesquisaNormaBean.excluir}" process="@this"
+	    			update=":frmPesquisa:normasTable" />
+	    	</p:confirmDialog>
+    	</h:form>
+    </ui:define>
+</ui:composition>

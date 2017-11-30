@@ -1,0 +1,1534 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">#{CadastroNormaBean.editando ? 'Edição norma' : 'Nova norma'} </ui:define>
+
+	<ui:define name="corpo">
+		<h:outputScript target="head" library="js" name="mascaraHora.js" />
+
+		<h:form id="frm">
+			<p:outputLabel
+				value="#{cadastroNormaBean.editando ? 'Edição norma' : 'Nova norma'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<p:focus />
+
+			<f:metadata>
+				<o:viewParam name="norma" value="#{cadastroNormaBean.norma}" converter="#{normaConverter}" />
+				<f:event listener="#{cadastroNormaBean.inicializar}"
+					type="preRenderView" />
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/admin/normas/CadastroNormas" />
+					<p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{cadastroNormaBean.salvar}"
+						title="grava a norma no banco de dados" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/admin/normas/PesquisaNormas"
+						title="volta para a tela de pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+
+			<p:tabView style="height:450px" id="tabgeral">
+				<p:tab title="Geral">
+
+
+					<p:panelGrid columns="2" id="painel"
+						style="width: 100%; margin-top: 10px"
+						columnClasses="rotulo, campo">
+
+						<p:outputLabel value="Nome do norma" for="norma"
+							styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroNormaBean.norma.norma}" id="norma"
+							maxlength="60" size="60"
+							placeholder="Nome que identifica a norma" required="true"
+							requiredMessage="Nome da norma obrigatório" />
+
+						<p:outputLabel value="Falta" for="falta" styleClass="rotuloCampo" />
+						<p:selectOneMenu id="falta" value="#{cadastroNormaBean.ocoFalta}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter"  />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Adicional noturno" for="an"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="an"
+							value="#{cadastroNormaBean.ocoAdicionalNoturno}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Afastamento" for="af"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="af"
+							value="#{cadastroNormaBean.ocoAfastamento}" style="width:220px"
+							required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="DSR" for="dsr" styleClass="rotuloCampo" />
+						<p:selectOneMenu id="dsr" value="#{cadastroNormaBean.ocoDSR}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Horas normais" for="hn"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="hn"
+							value="#{cadastroNormaBean.ocoHorasNormais}" style="width:220px"
+							required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Horas normais tolerancia" for="hnt"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="hnt"
+							value="#{cadastroNormaBean.ocoHorasNormaisTolerancia}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="mii" value="Tipo de Hora extra" visible="true"
+							styleClass="rotuloCampo" />
+						<p:selectOneRadio id="mii"
+							value="#{cadastroNormaBean.norma.tipoHoraExtra}">
+							<f:selectItem itemLabel="Fixo" itemValue="DIARIO" />
+							<f:selectItem itemLabel="Flexivel" itemValue="mensal" />
+						</p:selectOneRadio>
+
+						<p:outputLabel value="Folga" for="folga" styleClass="rotuloCampo" />
+						<p:selectOneMenu id="folga" value="#{cadastroNormaBean.ocoFolga}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Hora Normal Noturna" for="hnn"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="hnn"
+							value="#{cadastroNormaBean.ocoHorasNormaisNoturna}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Debito" for="debito"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="debito"
+							value="#{cadastroNormaBean.ocoDebito}" style="width:220px"
+							required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Credito" for="credito"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="credito"
+							value="#{cadastroNormaBean.ocoCredito}" style="width:220px"
+							required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+
+					</p:panelGrid>
+				</p:tab>
+				<p:tab title="Horas extras">
+					<div id="botaoTab">
+						<p:commandButton value="Seg..Sex"
+							action="#{cadastroNormaBean.copiaHe}" update="tabhorasextras"
+							process="@this" />
+					</div>
+
+					<p:panelGrid columns="2" style="width:100%;">
+						<p:tabView style="height:550px" id="tabhorasextras">
+							<p:tab title="Seg">
+								<p:panelGrid columns="3" id="pnlsegunda"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horSeg1" />
+									<p:inputText value="#{cadastroNormaBean.horSegDiurno1}"
+										id="horSeg1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h01" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSeg1"
+										value="#{cadastroNormaBean.ocoSegDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horSeg2" />
+									<p:inputText value="#{cadastroNormaBean.horSegDiurno2}"
+										id="horSeg2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h02" maxlength="5" style="text-align:center" />
+
+
+									<p:selectOneMenu id="OcorrSeg2"
+										value="#{cadastroNormaBean.ocoSegDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horSeg3" />
+
+									<p:inputText value="#{cadastroNormaBean.horSegDiurno3}"
+										id="horSeg3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h03" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSeg3"
+										value="#{cadastroNormaBean.ocoSegDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="b" style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horSegNot1" />
+									<p:inputText value="#{cadastroNormaBean.horSegNoturno1}"
+										id="horSegNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h04" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSegNot1"
+										value="#{cadastroNormaBean.ocoSegNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horSegNot2" />
+									<p:inputText value="#{cadastroNormaBean.horSegNoturno2}"
+										id="horSegNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h05" maxlength="5" style="text-align:center" />
+
+
+									<p:selectOneMenu id="OcorrSegNot2"
+										value="#{cadastroNormaBean.ocoSegNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horSegNot3" />
+									<p:inputText value="#{cadastroNormaBean.horSegNoturno3}"
+										id="horSegNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h06" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSegNot3"
+										value="#{cadastroNormaBean.ocoSegNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<h:outputText value="Usa banco de horas " 
+ 									style="padding-left:9px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasSeg}">
+								</p:selectBooleanCheckbox>
+
+								<br/>
+								<h:outputLabel value="Script em javscript para banco de horas"  style="width:30%;margin:9px" styleClass="rotuloCampo"/>
+								<br/>
+								<p:inputTextarea rows="6" cols="32"  value="#{cadastroNormaBean.norma.scriptSEG}"  style="width:30%;margin:10px"/>
+
+
+							</p:tab>
+							<p:tab title="Ter">
+								<p:panelGrid columns="3" id="pnlterca"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horTer1" />
+									<p:inputText value="#{cadastroNormaBean.horTerDiurno1}"
+										id="horTer1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrTer1"
+										value="#{cadastroNormaBean.ocoTerDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horTer2" />
+									<p:inputText value="#{cadastroNormaBean.horTerDiurno2}"
+										id="horTer2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrTer2"
+										value="#{cadastroNormaBean.ocoTerDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horTer3" />
+									<p:inputText value="#{cadastroNormaBean.horTerDiurno3}"
+										id="horTer3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrTer3"
+										value="#{cadastroNormaBean.ocoTerDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnltercaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horTerNot1" />
+									<p:inputText value="#{cadastroNormaBean.horTerNoturno1}"
+										id="horTerNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrTerNot1"
+										value="#{cadastroNormaBean.ocoTerNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horTerNot2" />
+									<p:inputText value="#{cadastroNormaBean.horTerNoturno2}"
+										id="horTerNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrTerNot2"
+										value="#{cadastroNormaBean.ocoTerNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horTerNot3" />
+									<p:inputText value="#{cadastroNormaBean.horTerNoturno3}"
+										id="horTerNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrTerNot3"
+										value="#{cadastroNormaBean.ocoTerNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasTer}">
+								</p:selectBooleanCheckbox>
+
+								<br/>
+								<h:outputLabel value="Script em javscript para banco de horas"  style="width:30%;margin:9px" styleClass="rotuloCampo"/>
+								<br/>
+								<p:inputTextarea rows="6" cols="32"  value="#{cadastroNormaBean.norma.scriptTER}"  style="width:30%;margin:10px"/>
+
+							</p:tab>
+							<p:tab title="Qua">
+								<p:panelGrid columns="3" id="pnlquarta"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horQua1" />
+									<p:inputText value="#{cadastroNormaBean.horQuaDiurno1}"
+										id="horQua1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQua1"
+										value="#{cadastroNormaBean.ocoQuaDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horQua2" />
+									<p:inputText value="#{cadastroNormaBean.horQuaDiurno2}"
+										id="horQua2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQua2"
+										value="#{cadastroNormaBean.ocoQuaDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horQua3" />
+									<p:inputText value="#{cadastroNormaBean.horQuaDiurno3}"
+										id="horQua3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQua3"
+										value="#{cadastroNormaBean.ocoQuaDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnlQuacaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horQuaNot1" />
+									<p:inputText value="#{cadastroNormaBean.horQuaNoturno1}"
+										id="horQuaNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQuaNot1"
+										value="#{cadastroNormaBean.ocoQuaNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horQuaNot2" />
+									<p:inputText value="#{cadastroNormaBean.horQuaNoturno2}"
+										id="horQuaNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQuaNot2"
+										value="#{cadastroNormaBean.ocoQuaNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horQuaNot3" />
+									<p:inputText value="#{cadastroNormaBean.horQuaNoturno3}"
+										id="horQuaNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQuaNot3"
+										value="#{cadastroNormaBean.ocoQuaNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasQua}">
+								</p:selectBooleanCheckbox>
+
+								<br/>
+								<h:outputLabel value="Script em javscript para banco de horas"  style="width:30%;margin:9px" styleClass="rotuloCampo"/>
+								<br/>
+								<p:inputTextarea rows="6" cols="32"  value="#{cadastroNormaBean.norma.scriptQUA}"  style="width:30%;margin:10px"/>
+
+							</p:tab>
+							<p:tab title="Qui">
+								<p:panelGrid columns="3" id="pnlquinta"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horQui1" />
+									<p:inputText value="#{cadastroNormaBean.horQuiDiurno1}"
+										id="horQui1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQui1"
+										value="#{cadastroNormaBean.ocoQuiDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horQui2" />
+									<p:inputText value="#{cadastroNormaBean.horQuiDiurno2}"
+										id="horQui2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQui2"
+										value="#{cadastroNormaBean.ocoQuiDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horQui3" />
+									<p:inputText value="#{cadastroNormaBean.horQuiDiurno3}"
+										id="horQui3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQui3"
+										value="#{cadastroNormaBean.ocoQuiDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnlQuicaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horQuiNot1" />
+									<p:inputText value="#{cadastroNormaBean.horQuiNoturno1}"
+										id="horQuiNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQuiNot1"
+										value="#{cadastroNormaBean.ocoQuiNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horQuiNot2" />
+									<p:inputText value="#{cadastroNormaBean.horQuiNoturno2}"
+										id="horQuiNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQuiNot2"
+										value="#{cadastroNormaBean.ocoQuiNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horQuiNot3" />
+									<p:inputText value="#{cadastroNormaBean.horQuiNoturno3}"
+										id="horQuiNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrQuiNot3"
+										value="#{cadastroNormaBean.ocoQuiNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasQui}">
+								</p:selectBooleanCheckbox>
+
+								<br/>
+								<h:outputLabel value="Script em javscript para banco de horas"  style="width:30%;margin:9px" styleClass="rotuloCampo"/>
+								<br/>
+								<p:inputTextarea rows="6" cols="32"  value="#{cadastroNormaBean.norma.scriptQUI}"  style="width:30%;margin:10px"/>
+
+
+							</p:tab>
+							<p:tab title="Sex">
+								<p:panelGrid columns="3" id="pnlSexta"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horSex1" />
+									<p:inputText value="#{cadastroNormaBean.horSexDiurno1}"
+										id="horSex1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSex1"
+										value="#{cadastroNormaBean.ocoSexDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horSex2" />
+									<p:inputText value="#{cadastroNormaBean.horSexDiurno2}"
+										id="horSex2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSex2"
+										value="#{cadastroNormaBean.ocoSexDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horSex3" />
+									<p:inputText value="#{cadastroNormaBean.horSexDiurno3}"
+										id="horSex3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSex3"
+										value="#{cadastroNormaBean.ocoSexDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnlSexcaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horSexNot1" />
+									<p:inputText value="#{cadastroNormaBean.horSexNoturno1}"
+										id="horSexNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSexNot1"
+										value="#{cadastroNormaBean.ocoSexNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horSexNot2" />
+									<p:inputText value="#{cadastroNormaBean.horSexNoturno2}"
+										id="horSexNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSexNot2"
+										value="#{cadastroNormaBean.ocoSexNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horSexNot3" />
+									<p:inputText value="#{cadastroNormaBean.horSexNoturno3}"
+										id="horSexNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSexNot3"
+										value="#{cadastroNormaBean.ocoSexNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+								</p:panelGrid>
+
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasSex}">
+								</p:selectBooleanCheckbox>
+
+								<br/>
+								<h:outputLabel value="Script em javscript para banco de horas"  style="width:30%;margin:9px" styleClass="rotuloCampo"/>
+								<br/>
+								<p:inputTextarea rows="6" cols="32"  value="#{cadastroNormaBean.norma.scriptSEX}"  style="width:30%;margin:10px"/>
+
+
+							</p:tab>
+							<p:tab title="Sab">
+								<p:panelGrid columns="3" id="pnlSab"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horSab1" />
+									<p:inputText value="#{cadastroNormaBean.horSabDiurno1}"
+										id="horSab1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSab1"
+										value="#{cadastroNormaBean.ocoSabDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horSab2" />
+									<p:inputText value="#{cadastroNormaBean.horSabDiurno2}"
+										id="horSab2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSab2"
+										value="#{cadastroNormaBean.ocoSabDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horSab3" />
+									<p:inputText value="#{cadastroNormaBean.horSabDiurno3}"
+										id="horSab3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSab3"
+										value="#{cadastroNormaBean.ocoSabDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnlSabcaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horSabNot1" />
+									<p:inputText value="#{cadastroNormaBean.horSabNoturno1}"
+										id="horSabNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSabNot1"
+										value="#{cadastroNormaBean.ocoSabNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horSabNot2" />
+									<p:inputText value="#{cadastroNormaBean.horSabNoturno2}"
+										id="horSabNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSabNot2"
+										value="#{cadastroNormaBean.ocoSabNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horSabNot3" />
+									<p:inputText value="#{cadastroNormaBean.horSabNoturno3}"
+										id="horSabNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrSabNot3"
+										value="#{cadastroNormaBean.ocoSabNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasSab}">
+								</p:selectBooleanCheckbox>
+
+								<br/>
+								<h:outputLabel value="Script em javscript para banco de horas"  style="width:30%;margin:9px" styleClass="rotuloCampo"/>
+								<br/>
+								<p:inputTextarea rows="6" cols="32"  value="#{cadastroNormaBean.norma.scriptSAB}"  style="width:30%;margin:10px"/>
+
+
+							</p:tab>
+							<p:tab title="Dom">
+								<p:panelGrid columns="3" id="pnlDom"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horDom1" />
+									<p:inputText value="#{cadastroNormaBean.horDomDiurno1}"
+										id="horDom1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrDom1"
+										value="#{cadastroNormaBean.ocoDomDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horDom2" />
+									<p:inputText value="#{cadastroNormaBean.horDomDiurno2}"
+										id="horDom2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrDom2"
+										value="#{cadastroNormaBean.ocoDomDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horDom3" />
+									<p:inputText value="#{cadastroNormaBean.horDomDiurno3}"
+										id="horDom3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrDom3"
+										value="#{cadastroNormaBean.ocoDomDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnlDomcaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horDomNot1" />
+									<p:inputText value="#{cadastroNormaBean.horDomNoturno1}"
+										id="horDomNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrDomNot1"
+										value="#{cadastroNormaBean.ocoDomNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horDomNot2" />
+									<p:inputText value="#{cadastroNormaBean.horDomNoturno2}"
+										id="horDomNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrDomNot2"
+										value="#{cadastroNormaBean.ocoDomNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horDomNot3" />
+									<p:inputText value="#{cadastroNormaBean.horDomNoturno3}"
+										id="horDomNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrDomNot3"
+										value="#{cadastroNormaBean.ocoDomNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasDom}">
+								</p:selectBooleanCheckbox>
+
+								<br/>
+								<h:outputLabel value="Script em javscript para banco de horas"  style="width:30%;margin:9px" styleClass="rotuloCampo"/>
+								<br/>
+								<p:inputTextarea rows="6" cols="32"  value="#{cadastroNormaBean.norma.scriptDOM}"  style="width:30%;margin:10px"/>
+
+
+							</p:tab>
+							<p:tab title="Feriado">
+								<p:panelGrid columns="3" id="pnlFer"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horFer1" />
+									<p:inputText value="#{cadastroNormaBean.horFerDiurno1}"
+										id="horFer1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFer1"
+										value="#{cadastroNormaBean.ocoFerDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horFer2" />
+									<p:inputText value="#{cadastroNormaBean.horFerDiurno2}"
+										id="horFer2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFer2"
+										value="#{cadastroNormaBean.ocoFerDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horFer3" />
+									<p:inputText value="#{cadastroNormaBean.horFerDiurno3}"
+										id="horFer3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFer3"
+										value="#{cadastroNormaBean.ocoFerDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnlFercaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horFerNot1" />
+									<p:inputText value="#{cadastroNormaBean.horFerNoturno1}"
+										id="horFerNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFerNot1"
+										value="#{cadastroNormaBean.ocoFerNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horFerNot2" />
+									<p:inputText value="#{cadastroNormaBean.horFerNoturno2}"
+										id="horFerNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFerNot2"
+										value="#{cadastroNormaBean.ocoFerNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horFerNot3" />
+									<p:inputText value="#{cadastroNormaBean.horFerNoturno3}"
+										id="horFerNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFerNot3"
+										value="#{cadastroNormaBean.ocoFerNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasFer}">
+								</p:selectBooleanCheckbox>
+
+							</p:tab>
+							<p:tab title="Folga">
+								<p:panelGrid columns="3" id="pnlFol"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horFol1" />
+									<p:inputText value="#{cadastroNormaBean.horFolDiurno1}"
+										id="horFol1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFol1"
+										value="#{cadastroNormaBean.ocoFolDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horFol2" />
+									<p:inputText value="#{cadastroNormaBean.horFolDiurno2}"
+										id="horFol2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFol2"
+										value="#{cadastroNormaBean.ocoFolDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horFol3" />
+									<p:inputText value="#{cadastroNormaBean.horFolDiurno3}"
+										id="horFol3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFol3"
+										value="#{cadastroNormaBean.ocoFolDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnlFolcaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horFolNot1" />
+									<p:inputText value="#{cadastroNormaBean.horFolNoturno1}"
+										id="horFolNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFolNot1"
+										value="#{cadastroNormaBean.ocoFolNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horFolNot2" />
+									<p:inputText value="#{cadastroNormaBean.horFolNoturno2}"
+										id="horFolNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFolNot2"
+										value="#{cadastroNormaBean.ocoFolNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horFolNot3" />
+									<p:inputText value="#{cadastroNormaBean.horFolNoturno3}"
+										id="horFolNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrFolNot3"
+										value="#{cadastroNormaBean.ocoFolNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasFol}">
+								</p:selectBooleanCheckbox>
+
+
+							</p:tab>
+							<p:tab title="Especial">
+								<p:panelGrid columns="3" id="pnlEsp"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Diurno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE diurna até" for="horEsp1" />
+									<p:inputText value="#{cadastroNormaBean.horEspDiurno1}"
+										id="horEsp1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h07" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrEsp1"
+										value="#{cadastroNormaBean.ocoEspDiurno1}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaDiurno1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horEsp2" />
+									<p:inputText value="#{cadastroNormaBean.horEspDiurno2}"
+										id="horEsp2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h08" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrEsp2"
+										value="#{cadastroNormaBean.ocoEspDiurno2}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaDiurno2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE diurna até" for="horEsp3" />
+									<p:inputText value="#{cadastroNormaBean.horEspDiurno3}"
+										id="horEsp3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h09" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrEsp3"
+										value="#{cadastroNormaBean.ocoEspDiurno3}" style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaDiurno3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<p:panelGrid columns="3" id="pnlEspcaNoturno"
+									style="width:30%;margin:10px">
+									<f:facet name="header">
+										<p:row>
+											<p:column colspan="3">Noturno</p:column>
+										</p:row>
+									</f:facet>
+
+									<p:outputLabel value="" />
+									<p:outputLabel value="limite da faixa" />
+									<p:outputLabel value="cód. Ocorrência" />
+
+									<p:outputLabel value="HE noturna até" for="horEspNot1" />
+									<p:inputText value="#{cadastroNormaBean.horEspNoturno1}"
+										id="horEspNot1" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h10" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrEspNot1"
+										value="#{cadastroNormaBean.ocoEspNoturno1}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaNot1}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horEspNot2" />
+									<p:inputText value="#{cadastroNormaBean.horEspNoturno2}"
+										id="horEspNot2" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h11" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrEspNot2"
+										value="#{cadastroNormaBean.ocoEspNoturno2}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaNot2}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+
+									<p:outputLabel value="HE noturna até" for="horEspNot3" />
+									<p:inputText value="#{cadastroNormaBean.horEspNoturno3}"
+										id="horEspNot3" onkeypress="Mascara_Hora(this.value,this)"
+										size="5" lable="h12" maxlength="5" style="text-align:center" />
+
+									<p:selectOneMenu id="OcorrEspNot3"
+										value="#{cadastroNormaBean.ocoEspNoturno3}"
+										style="width:180px">
+										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
+										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaNot3}"
+											itemLabel="#{ocorrencia.ocorrencia}" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<h:outputText value="Usa banco de horas "
+									style="padding-left:6px" styleClass="rotuloCampo" />
+								<p:selectBooleanCheckbox
+									value="#{cadastroNormaBean.norma.bancoHorasEsp}">
+								</p:selectBooleanCheckbox>
+
+
+							</p:tab>
+						</p:tabView>
+					</p:panelGrid>
+
+				</p:tab>
+				<p:tab title="Atrasos e Saidas anteciapdas">
+
+					<p:panelGrid columns="2" id="painelSaida"
+						style="width: 100%; margin-top: 10px" columnClasses="rotulo campo">
+
+
+						<p:outputLabel value="Atraso" for="atraso"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="atraso"
+							value="#{cadastroNormaBean.ocoHorasAtraso}" style="width:220px"
+							required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Atraso 2" for="atraso2"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="atraso2"
+							value="#{cadastroNormaBean.ocoHorasAtraso2}" style="width:220px"
+							required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Saida" for="saida" styleClass="rotuloCampo" />
+						<p:selectOneMenu id="saida"
+							value="#{cadastroNormaBean.ocoHorasSaidaAntecipada}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Saida 2" for="saida2"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="saida2"
+							value="#{cadastroNormaBean.ocoHorasSaidaAntecipada2}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Atraso não descontado" for="atrasonao"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="atrasonao"
+							value="#{cadastroNormaBean.ocoHorasAtrasoNaoDescontado}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Saida não descontada" for="saidanao"
+							styleClass="rotuloCampo" />
+						<p:selectOneMenu id="saidanao"
+							value="#{cadastroNormaBean.ocoHorasSaidaAntecipadaNaoDescontada}"
+							style="width:220px" required="true">
+							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
+							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
+								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
+								itemLabel="#{ocorrencia.ocorrencia}" />
+						</p:selectOneMenu>
+
+					</p:panelGrid>
+				</p:tab>
+			</p:tabView>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

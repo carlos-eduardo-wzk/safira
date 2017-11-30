@@ -7,8 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.transaction.Transactional;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -19,7 +17,6 @@ import org.hibernate.criterion.Restrictions;
 
 import filter.UsuarioFilter;
 import model.Usuario;
-import service.NegocioException;
 
 @Stateless
 public class Usuarios implements Serializable {
@@ -58,19 +55,14 @@ public class Usuarios implements Serializable {
 		return (Usuario) session.get(Usuario.class, id);
 	}
 
-	@Transactional
+	
 	public void remover(Usuario usuario) {
-		try {
-			usuario = porId(usuario.getId());
-			Session session = em.unwrap(Session.class);
-			session.getTransaction().begin();
-			session.delete(usuario);
-			session.getTransaction().commit();
-			session.flush();
-			
-		} catch (PersistenceException e) {
-			throw new NegocioException("Usuario nao pode ser excluido");
-		}
+		
+		
+        System.out.println("remover usu " + usuario);
+		Usuario usu = null;
+		usu = em.find(Usuario.class, usuario.getId());
+		em.remove(usu);
 	}
 
 	public Usuario porEmail(String email) {

@@ -10,7 +10,7 @@ import model.Cargo;
 import service.CadastroCargoService;
 import util.jsf.FacesUtil;
 
-@ManagedBean()
+@ManagedBean
 @ViewScoped
 public class CadastroCargoBean implements Serializable{
 

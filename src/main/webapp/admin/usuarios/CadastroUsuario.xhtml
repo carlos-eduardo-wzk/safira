@@ -18,8 +18,8 @@
 
 			<p:messages autoUpdate="true" closable="true" />
 
-			<f:metadata>
-				<f:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}" converter="#{usuarioConverter}" />
+			<f:metadata>			    
+				<f:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}" converter="#{usuarioConverter}"  />
 				<f:event listener="#{cadastroUsuarioBean.inicializar}"
 					type="preRenderView" />
 			</f:metadata>
@@ -61,12 +61,12 @@
 					placeholder="senha no minimo 5 digitos" required="true"
 					requiredMessage="Senha obrigatória com no mínimo 5 digitos" />
 
-
-				<p:selectOneMenu id="grupo"
-					value="#{cadastroUsuarioBean.grupoSelecionado}">
+				<p:selectOneMenu id="grupo"  converter="#{grupoConverter}"
+					value="#{cadastroUsuarioBean.grupoSelecionado}" >
 					<f:selectItems value="#{cadastroUsuarioBean.lstGrupos}" var="grupo"
-						itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
+						itemValue="#{grupo}" itemLabel="#{grupo.descricao}"   />
 				</p:selectOneMenu>
+
 
 				<p:commandButton value="Adicionar grupo"
 					action="#{cadastroUsuarioBean.adicionaGrupo}"

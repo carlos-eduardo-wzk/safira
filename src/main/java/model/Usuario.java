@@ -30,7 +30,8 @@ public class Usuario implements Serializable {
 	private String email;
 	@NotBlank
 	private String senha;
-	@ManyToMany(cascade = CascadeType.ALL)
+	
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	private List<Grupo> grupos = new ArrayList<>();
 
@@ -106,11 +107,7 @@ public class Usuario implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email
-				+ ", senha=" + senha + ", grupos=" + grupos + "]";
-	}
+	
 
 
 

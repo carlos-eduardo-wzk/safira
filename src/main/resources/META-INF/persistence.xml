@@ -13,6 +13,10 @@
         <class>model.Filial</class>
         <class>model.Grupo</class>
         <class>model.Usuario</class>
+        <class>model.Norma</class>
+        <class>model.Ocorrencia</class>
+        
+        
         
        
         
