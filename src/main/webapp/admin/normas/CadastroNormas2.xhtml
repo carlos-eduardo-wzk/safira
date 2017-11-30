@@ -57,10 +57,10 @@
 							requiredMessage="Nome da norma obrigatório" />
 
 						<p:outputLabel value="Falta" for="falta" styleClass="rotuloCampo" />
-						<p:selectOneMenu id="falta" value="#{cadastroNormaBean.ocoFalta}" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="falta" value="#{cadastroNormaBean.ocoFalta}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
-							 
+							<f:converter converterId="converter.NormaOcorrConverter"  />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -68,10 +68,11 @@
 
 						<p:outputLabel value="Adicional noturno" for="an"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="an" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="an"
 							value="#{cadastroNormaBean.ocoAdicionalNoturno}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -79,20 +80,21 @@
 
 						<p:outputLabel value="Afastamento" for="af"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="af" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="af"
 							value="#{cadastroNormaBean.ocoAfastamento}" style="width:220px"
 							required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel value="DSR" for="dsr" styleClass="rotuloCampo" />
-						<p:selectOneMenu id="dsr" value="#{cadastroNormaBean.ocoDSR}"  converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="dsr" value="#{cadastroNormaBean.ocoDSR}" 
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
-							 
+							<f:converter converterId="converter.NormaOcorrConverter"  />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -100,10 +102,11 @@
 
 						<p:outputLabel value="Horas normais" for="hn"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="hn" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="hn"
 							value="#{cadastroNormaBean.ocoHorasNormais}" style="width:220px"
 							required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -111,10 +114,11 @@
 
 						<p:outputLabel value="Horas normais tolerancia" for="hnt"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="hnt" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="hnt"
 							value="#{cadastroNormaBean.ocoHorasNormaisTolerancia}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -129,9 +133,10 @@
 						</p:selectOneRadio>
 
 						<p:outputLabel value="Folga" for="folga" styleClass="rotuloCampo" />
-						<p:selectOneMenu id="folga" value="#{cadastroNormaBean.ocoFolga}" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="folga" value="#{cadastroNormaBean.ocoFolga}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -139,10 +144,11 @@
 
 						<p:outputLabel value="Hora Normal Noturna" for="hnn"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="hnn" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="hnn"
 							value="#{cadastroNormaBean.ocoHorasNormaisNoturna}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -150,10 +156,11 @@
 
 						<p:outputLabel value="Debito" for="debito"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="debito" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="debito"
 							value="#{cadastroNormaBean.ocoDebito}" style="width:220px"
 							required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -161,10 +168,11 @@
 
 						<p:outputLabel value="Credito" for="credito"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="credito" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="credito"
 							value="#{cadastroNormaBean.ocoCredito}" style="width:220px"
 							required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -200,9 +208,10 @@
 										id="horSeg1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h01" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSeg1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSeg1"
 										value="#{cadastroNormaBean.ocoSegDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -214,9 +223,10 @@
 										size="5" lable="h02" maxlength="5" style="text-align:center" />
 
 
-									<p:selectOneMenu id="OcorrSeg2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSeg2"
 										value="#{cadastroNormaBean.ocoSegDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -228,9 +238,10 @@
 										id="horSeg3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h03" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSeg3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSeg3"
 										value="#{cadastroNormaBean.ocoSegDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -253,10 +264,11 @@
 										id="horSegNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h04" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSegNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSegNot1"
 										value="#{cadastroNormaBean.ocoSegNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -268,10 +280,11 @@
 										size="5" lable="h05" maxlength="5" style="text-align:center" />
 
 
-									<p:selectOneMenu id="OcorrSegNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSegNot2"
 										value="#{cadastroNormaBean.ocoSegNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -282,10 +295,11 @@
 										id="horSegNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h06" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSegNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSegNot3"
 										value="#{cadastroNormaBean.ocoSegNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -324,9 +338,10 @@
 										id="horTer1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrTer1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrTer1"
 										value="#{cadastroNormaBean.ocoTerDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -337,9 +352,10 @@
 										id="horTer2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrTer2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrTer2"
 										value="#{cadastroNormaBean.ocoTerDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -350,9 +366,10 @@
 										id="horTer3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrTer3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrTer3"
 										value="#{cadastroNormaBean.ocoTerDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -375,11 +392,12 @@
 									<p:inputText value="#{cadastroNormaBean.horTerNoturno1}"
 										id="horTerNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
- 
-									<p:selectOneMenu id="OcorrTerNot1" converter="#{normaOcorrConverter}"
+
+									<p:selectOneMenu id="OcorrTerNot1"
 										value="#{cadastroNormaBean.ocoTerNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -390,10 +408,11 @@
 										id="horTerNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrTerNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrTerNot2"
 										value="#{cadastroNormaBean.ocoTerNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -404,10 +423,11 @@
 										id="horTerNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrTerNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrTerNot3"
 										value="#{cadastroNormaBean.ocoTerNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeTerFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -444,9 +464,10 @@
 										id="horQua1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQua1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQua1"
 										value="#{cadastroNormaBean.ocoQuaDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -457,9 +478,10 @@
 										id="horQua2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQua2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQua2"
 										value="#{cadastroNormaBean.ocoQuaDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -470,9 +492,10 @@
 										id="horQua3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQua3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQua3"
 										value="#{cadastroNormaBean.ocoQuaDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -496,10 +519,11 @@
 										id="horQuaNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQuaNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQuaNot1"
 										value="#{cadastroNormaBean.ocoQuaNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -510,10 +534,11 @@
 										id="horQuaNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQuaNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQuaNot2"
 										value="#{cadastroNormaBean.ocoQuaNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -524,10 +549,11 @@
 										id="horQuaNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQuaNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQuaNot3"
 										value="#{cadastroNormaBean.ocoQuaNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuaFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -564,9 +590,10 @@
 										id="horQui1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQui1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQui1"
 										value="#{cadastroNormaBean.ocoQuiDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -577,9 +604,10 @@
 										id="horQui2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQui2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQui2"
 										value="#{cadastroNormaBean.ocoQuiDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -590,9 +618,10 @@
 										id="horQui3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQui3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQui3"
 										value="#{cadastroNormaBean.ocoQuiDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -616,10 +645,11 @@
 										id="horQuiNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQuiNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQuiNot1"
 										value="#{cadastroNormaBean.ocoQuiNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -630,10 +660,11 @@
 										id="horQuiNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQuiNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQuiNot2"
 										value="#{cadastroNormaBean.ocoQuiNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -644,10 +675,11 @@
 										id="horQuiNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrQuiNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrQuiNot3"
 										value="#{cadastroNormaBean.ocoQuiNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeQuiFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -686,9 +718,10 @@
 										id="horSex1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSex1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSex1"
 										value="#{cadastroNormaBean.ocoSexDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -699,9 +732,10 @@
 										id="horSex2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSex2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSex2"
 										value="#{cadastroNormaBean.ocoSexDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -712,9 +746,10 @@
 										id="horSex3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSex3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSex3"
 										value="#{cadastroNormaBean.ocoSexDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -738,10 +773,11 @@
 										id="horSexNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSexNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSexNot1"
 										value="#{cadastroNormaBean.ocoSexNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -752,10 +788,11 @@
 										id="horSexNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSexNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSexNot2"
 										value="#{cadastroNormaBean.ocoSexNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -766,10 +803,11 @@
 										id="horSexNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSexNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSexNot3"
 										value="#{cadastroNormaBean.ocoSexNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSexFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -808,9 +846,10 @@
 										id="horSab1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSab1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSab1"
 										value="#{cadastroNormaBean.ocoSabDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -821,9 +860,10 @@
 										id="horSab2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSab2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSab2"
 										value="#{cadastroNormaBean.ocoSabDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -834,9 +874,10 @@
 										id="horSab3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSab3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSab3"
 										value="#{cadastroNormaBean.ocoSabDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -860,10 +901,11 @@
 										id="horSabNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSabNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSabNot1"
 										value="#{cadastroNormaBean.ocoSabNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -874,10 +916,11 @@
 										id="horSabNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSabNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSabNot2"
 										value="#{cadastroNormaBean.ocoSabNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -888,10 +931,11 @@
 										id="horSabNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrSabNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrSabNot3"
 										value="#{cadastroNormaBean.ocoSabNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeSabFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -928,9 +972,10 @@
 										id="horDom1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrDom1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrDom1"
 										value="#{cadastroNormaBean.ocoDomDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -941,9 +986,10 @@
 										id="horDom2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrDom2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrDom2"
 										value="#{cadastroNormaBean.ocoDomDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -954,9 +1000,10 @@
 										id="horDom3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrDom3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrDom3"
 										value="#{cadastroNormaBean.ocoDomDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -980,10 +1027,11 @@
 										id="horDomNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrDomNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrDomNot1"
 										value="#{cadastroNormaBean.ocoDomNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -994,10 +1042,11 @@
 										id="horDomNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrDomNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrDomNot2"
 										value="#{cadastroNormaBean.ocoDomNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1008,10 +1057,11 @@
 										id="horDomNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrDomNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrDomNot3"
 										value="#{cadastroNormaBean.ocoDomNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeDomFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1048,9 +1098,10 @@
 										id="horFer1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFer1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFer1"
 										value="#{cadastroNormaBean.ocoFerDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1061,9 +1112,10 @@
 										id="horFer2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFer2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFer2"
 										value="#{cadastroNormaBean.ocoFerDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1074,9 +1126,10 @@
 										id="horFer3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFer3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFer3"
 										value="#{cadastroNormaBean.ocoFerDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1100,10 +1153,11 @@
 										id="horFerNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFerNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFerNot1"
 										value="#{cadastroNormaBean.ocoFerNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1114,10 +1168,11 @@
 										id="horFerNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFerNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFerNot2"
 										value="#{cadastroNormaBean.ocoFerNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1128,10 +1183,11 @@
 										id="horFerNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFerNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFerNot3"
 										value="#{cadastroNormaBean.ocoFerNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFerFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1163,9 +1219,10 @@
 										id="horFol1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFol1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFol1"
 										value="#{cadastroNormaBean.ocoFolDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1176,9 +1233,10 @@
 										id="horFol2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFol2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFol2"
 										value="#{cadastroNormaBean.ocoFolDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1189,9 +1247,10 @@
 										id="horFol3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFol3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFol3"
 										value="#{cadastroNormaBean.ocoFolDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1215,10 +1274,11 @@
 										id="horFolNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFolNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFolNot1"
 										value="#{cadastroNormaBean.ocoFolNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1229,10 +1289,11 @@
 										id="horFolNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFolNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFolNot2"
 										value="#{cadastroNormaBean.ocoFolNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1243,10 +1304,11 @@
 										id="horFolNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrFolNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrFolNot3"
 										value="#{cadastroNormaBean.ocoFolNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeFolFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1279,9 +1341,10 @@
 										id="horEsp1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h07" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrEsp1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrEsp1"
 										value="#{cadastroNormaBean.ocoEspDiurno1}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaDiurno1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1292,9 +1355,10 @@
 										id="horEsp2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h08" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrEsp2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrEsp2"
 										value="#{cadastroNormaBean.ocoEspDiurno2}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaDiurno2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1305,9 +1369,10 @@
 										id="horEsp3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h09" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrEsp3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrEsp3"
 										value="#{cadastroNormaBean.ocoEspDiurno3}" style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaDiurno3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1331,10 +1396,11 @@
 										id="horEspNot1" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h10" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrEspNot1" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrEspNot1"
 										value="#{cadastroNormaBean.ocoEspNoturno1}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaNot1}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1345,10 +1411,11 @@
 										id="horEspNot2" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h11" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrEspNot2" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrEspNot2"
 										value="#{cadastroNormaBean.ocoEspNoturno2}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaNot2}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1359,10 +1426,11 @@
 										id="horEspNot3" onkeypress="Mascara_Hora(this.value,this)"
 										size="5" lable="h12" maxlength="5" style="text-align:center" />
 
-									<p:selectOneMenu id="OcorrEspNot3" converter="#{normaOcorrConverter}"
+									<p:selectOneMenu id="OcorrEspNot3"
 										value="#{cadastroNormaBean.ocoEspNoturno3}"
 										style="width:180px">
 										<f:selectItem itemLabel="Selecione" />
+										<f:converter converterId="converter.NormaOcorrConverter" />
 										<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 											var="ocorrencia" itemValue="#{ocorrenciaHeEspFaixaNot3}"
 											itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1389,29 +1457,32 @@
 
 						<p:outputLabel value="Atraso" for="atraso"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="atraso" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="atraso"
 							value="#{cadastroNormaBean.ocoHorasAtraso}" style="width:220px"
 							required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
 						</p:selectOneMenu>
 						<p:outputLabel value="Atraso 2" for="atraso2"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="atraso2" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="atraso2"
 							value="#{cadastroNormaBean.ocoHorasAtraso2}" style="width:220px"
 							required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
 						</p:selectOneMenu>
 						<p:outputLabel value="Saida" for="saida" styleClass="rotuloCampo" />
-						<p:selectOneMenu id="saida" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="saida"
 							value="#{cadastroNormaBean.ocoHorasSaidaAntecipada}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1419,10 +1490,11 @@
 
 						<p:outputLabel value="Saida 2" for="saida2"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="saida2" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="saida2"
 							value="#{cadastroNormaBean.ocoHorasSaidaAntecipada2}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1430,10 +1502,11 @@
 
 						<p:outputLabel value="Atraso não descontado" for="atrasonao"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="atrasonao" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="atrasonao"
 							value="#{cadastroNormaBean.ocoHorasAtrasoNaoDescontado}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />
@@ -1441,10 +1514,11 @@
 
 						<p:outputLabel value="Saida não descontada" for="saidanao"
 							styleClass="rotuloCampo" />
-						<p:selectOneMenu id="saidanao" converter="#{normaOcorrConverter}"
+						<p:selectOneMenu id="saidanao"
 							value="#{cadastroNormaBean.ocoHorasSaidaAntecipadaNaoDescontada}"
 							style="width:220px" required="true">
 							<f:selectItem itemLabel="Selecione" />
+							<f:converter converterId="converter.NormaOcorrConverter" />
 							<f:selectItems value="#{cadastroNormaBean.listaOcorrencia}"
 								var="ocorrencia" itemValue="#{ocorrenciaHeSegFaixaDiurno1}"
 								itemLabel="#{ocorrencia.ocorrencia}" />

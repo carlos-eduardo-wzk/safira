@@ -5,7 +5,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
 import model.Ocorrencia;
@@ -13,7 +12,7 @@ import repository.Ocorrencias;
 
 @ManagedBean
 @ViewScoped
-@FacesConverter("converter.NormaOcorrConverter")
+//@FacesConverter("converter.NormaOcorrConverter")
 public class NormaOcorrConverter implements Converter {
 	
 	@Inject
