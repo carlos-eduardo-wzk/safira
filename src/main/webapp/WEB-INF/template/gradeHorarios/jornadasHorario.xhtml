@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable value="#{cadastroHorarioBean.lstJornada}" var="hor"
+		rowIndexVar="linha" id="tabelaHorarios">
+		<f:facet name="header">sequencia de Jornadas </f:facet>
+
+		<p:column headerText="#">
+            #{linha+1}
+       </p:column>
+
+		<p:column headerText="Jornada" style="width:93%">
+			<h:outputText value="#{hor.jornada}"
+				rendered="#{hor.jornada != null}" />
+
+			<p:autoComplete styleClass="produto-tabela" style="width: 99%"
+				value="#{cadastroHorarioBean.jornadaLinhaEditavel}" var="jornada"
+				completeMethod="#{cadastroHorarioBean.completarJornada}"
+				itemLabel="#{jornada.jornada}" itemValue="#{jornada}"
+				forceSelection="true" rendered="#{hor.jornada == null}"
+				placeholder="Digite aqui para selecionar a jornada">
+
+				<p:ajax event="itemSelect" update="tabelaHorarios"
+					listener="#{cadastroHorarioBean.carregarJornadaLinhaEditavel}" />
+
+			</p:autoComplete>
+		</p:column>
+
+		<p:column>
+			<p:commandButton icon="ui-icon-trash" title="Excluir"
+				oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+				update=":frm:confirmacaoExclusaoDialog">
+				<f:setPropertyActionListener
+					target="#{cadastroHorarioBean.jornadaSelecionada}"
+					value="#{jornada}" />
+				<f:setPropertyActionListener
+					target="#{cadastroHorarioBean.linhaAtual}" value="#{linha}" />
+			</p:commandButton>
+		</p:column>
+
+
+	</p:dataTable>
+	
+	<p:confirmDialog header="Exclusão de jornada"
+		message="Tem certeza que deseja excluir a jornada #{cadastroHorarioBean.linhaAtual+1} ?"
+		widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+		<p:button value="Não"
+			onclick="PF('confirmacaoExclusao').hide(); return false;" />
+		<p:commandButton value="Sim"
+			oncomplete="PF('confirmacaoExclusao').hide();"
+			action="#{cadastroHorarioBean.excluirJornada}" process="@this" 
+			update=":frm:tabelaHorarios" >
+
+		</p:commandButton>
+
+	</p:confirmDialog>	
+
+
+</ui:composition>

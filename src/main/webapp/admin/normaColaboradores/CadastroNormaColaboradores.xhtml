@@ -1,0 +1,143 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">#{CadastroCargoBean.editando ? 'Edição Norma colaborador' : 'Novo Norma colaborador'} </ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frm">
+
+
+			<p:outputLabel
+				value="#{cadastroCargoBean.editando ? 'Edição norma colaborador' : 'Novo norma colaborador'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<p:focus />
+
+			<f:metadata>
+				<o:viewParam name="NormaColaborador" 
+					value="#{cadastroNormaColaboradorBean.normaColaborador}" />
+
+				<o:viewParam name="colaborador" converter="#{colaboradorConverter}"
+					value="#{cadastroNormaColaboradorBean.colaborador}" />
+
+				<f:event listener="#{cadastroNormaColaboradorBean.inicializar}"
+					type="preRenderView" />
+
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:commandButton value="Novo"
+						action="#{cadastroNormaColaboradorBean.novo}" update="@form">
+
+					</p:commandButton>
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						update="NormaColaboradorTable"
+						action="#{cadastroNormaColaboradorBean.salvar}" 
+						title="grava a norma atrelada ao colaborador no banco de dados"  />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="volta"
+						outcome="/admin/colaboradores/CadastroColaboradores" title="volta para a tela de pesquisa">
+						<f:param name="colaborador"
+							value="#{cadastroNormaColaboradorBean.colaborador.id}" />
+					</p:button>
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+			<br />
+
+			<p:panelGrid columns="2"
+				columnClasses="rotuloCadastro2 campoCadastro2"
+				style="width: 98%;margin-left:15px">
+
+				<p:outputLabel value="Colaborador" styleClass="rotuloCampo" />
+				<p:outputLabel
+					value="#{cadastroNormaColaboradorBean.colaborador.matricula} -  #{cadastroNormaColaboradorBean.colaborador.nome}" />
+
+				<p:outputLabel value="Norma" for="norma" styleClass="rotuloCampo" />
+				<p:selectOneMenu id="norma" required="true" converter="#{normaConverter}"
+					value="#{cadastroNormaColaboradorBean.normaColaborador.norma}"
+					style="width:280px">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{cadastroNormaColaboradorBean.listaNorma}"
+						var="norma" itemValue="#{norma}" itemLabel="#{norma.norma}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Data inicio" styleClass="rotuloCampo"
+					for="dataini" />
+				<p:calendar id="dataini" required="true"
+					value="#{cadastroNormaColaboradorBean.normaColaborador.dataInicio}"
+					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
+					locale="pt" />
+				<p:outputLabel value="Motivo" styleClass="rotuloCampo" />
+				<p:inputText
+					value="#{cadastroNormaColaboradorBean.normaColaborador.motivo}" />
+			</p:panelGrid>
+
+			<p:dataTable id="NormaColaboradorTable"
+				value="#{cadastroNormaColaboradorBean.listaNormaColaborador}"
+				var="horcola" style="margin-top: 20px"
+				emptyMessage="Nenhum norma x colaborador encontrado." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+				<p:column headerText="Data inicio">
+					<h:outputText value="#{horcola.dataInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy EEE" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Norma">
+					<h:outputText value="#{horcola.norma.norma}" />
+				</p:column>
+
+				<p:column headerText="Motivo">
+					<h:outputText value="#{horcola.motivo}" />
+				</p:column>
+
+
+				<p:column style="width: 100px; text-align: center" headerText="Ação">
+					<p:commandButton icon="ui-icon-pencil" title="Editar" update=":frm">
+						<f:setPropertyActionListener
+							target="#{cadastroNormaColaboradorBean.normaColaborador}"
+							value="#{horcola}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frm:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{cadastroNormaColaboradorBean.normaColaboradorSelecionado}"
+							value="#{horcola}" />
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+
+
+			<p:confirmDialog header="Exclusão de Norma colaborador"
+				message="Tem certeza que deseja excluir o Norma colaborador ?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{cadastroNormaColaboradorBean.excluir}" process="@this"
+					update=":frm:NormaColaboradorTable" />
+			</p:confirmDialog>
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

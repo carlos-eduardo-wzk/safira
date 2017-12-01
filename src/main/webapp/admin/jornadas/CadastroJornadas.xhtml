@@ -1,0 +1,196 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+
+
+	<ui:define name="titulo">#{CadastroJornadaBean.editando ? 'Edição jornada' : 'Nova jornada'} </ui:define>
+
+	<ui:define name="corpo">
+		<h:outputScript target="head" library="js" name="mascaraHora.js" />
+
+		<h:form id="frm">
+			<p:outputLabel
+				value="#{cadastroCargoBean.editando ? 'Edição jornada' : 'Novo jornada'}"
+				style="font-weight:bold;font-size:16px" />
+
+			<p:focus />
+
+			<f:metadata>
+				<o:viewParam name="jornada" value="#{cadastroJornadaBean.jornada}" converter="#{jornadaConverter}" />
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/admin/jornadas/CadastroJornadas" />
+					<p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{cadastroJornadaBean.salvar}" title="grava a jornada no banco de dados" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/admin/jornadas/PesquisaJornadas" title="volta para a tela de pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 1px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Nome do jornada" for="jornada"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroJornadaBean.jornada.jornada}"
+					id="jornada" maxlength="80" size="80"
+					placeholder="nome identificador da jornada" required="true"
+					requiredMessage="Nome da jornada obrigatório" />
+
+				<h:outputLabel for="mii" value="Tipo de regime" visible="true"
+					styleClass="rotuloCampo" />
+				<p:selectOneRadio id="mii"
+					value="#{cadastroJornadaBean.jornada.tipoRegime}">
+					<f:selectItem itemLabel="Fixo" itemValue="FIXO" />
+					<f:selectItem itemLabel="Flexivel" itemValue="FLEXIVEL" />
+				</p:selectOneRadio>
+
+				<p:outputLabel value="Pre assinalado" styleClass="rotuloCampo" />
+				<h:panelGroup>
+					<p:outputLabel value="Pre S1 " styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroJornadaBean.horPreAssinaladoS1}"
+						id="pres1" onkeypress="Mascara_Hora(this.value,this)" size="5"
+						lable="Pre" maxlength="5" style="text-align:center" />
+
+					<p:spacer width="10px" />
+
+					<p:outputLabel value="Pre E2 " styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroJornadaBean.horPreAssinaladoE2}"
+						id="pree2" onkeypress="Mascara_Hora(this.value,this)" size="5"
+						lable="Pre" maxlength="5" style="text-align:center" />
+				</h:panelGroup>
+
+				<p:spacer />
+
+				<h:panelGroup>
+
+					<h:panelGrid columns="4" style="width:50%; text-align:center"
+						rowClasses="list-row-even1,list-row-odd" cellpadding="0"
+						cellspacing="0" rules="rows">
+
+						<p:column colspan="1">
+							<h:outputLabel style="font-weight: bold"> Tolerância antes (min) </h:outputLabel>
+						</p:column>
+						<p:column colspan="1">
+						</p:column>
+						<p:column colspan="1">
+							<h:outputLabel style="font-weight: bold">Horas Entrada / Saida</h:outputLabel>
+						</p:column>
+						<p:column colspan="1">
+							<h:outputLabel style="font-weight: bold">Tolerância depois (min)</h:outputLabel>
+						</p:column>
+
+
+
+						<p:inputText value="#{cadastroJornadaBean.jornada.tole1ant}"
+							id="tole1ant" maxlength="3" size="3" />
+						<p:outputLabel value="E1" styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroJornadaBean.horIniE1}" id="e1"
+							onkeypress="Mascara_Hora(this.value,this)" size="5" lable="h01"
+							maxlength="5" style="text-align:center" />
+						<p:inputText value="#{cadastroJornadaBean.jornada.tole1dep}"
+							id="tole1dep" maxlength="3" size="3" />
+
+						<p:inputText value="#{cadastroJornadaBean.jornada.tols1ant}"
+							id="tols1ant" maxlength="3" size="3" />
+						<p:outputLabel value="S1" styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroJornadaBean.horIniS1}" id="s1"
+							onkeypress="Mascara_Hora(this.value,this)" size="5" lable="h02"
+							maxlength="5" style="text-align:center" />
+						<p:inputText value="#{cadastroJornadaBean.jornada.tols1dep}"
+							id="tols1dep" maxlength="3" size="3" />
+
+						<p:inputText value="#{cadastroJornadaBean.jornada.tole2ant}"
+							id="tole2ant" maxlength="3" size="3" />
+						<p:outputLabel value="E2" styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroJornadaBean.horIniE2}" id="e2"
+							onkeypress="Mascara_Hora(this.value,this)" size="5" lable="h03"
+							maxlength="5" style="text-align:center" />
+						<p:inputText value="#{cadastroJornadaBean.jornada.tole2dep}"
+							id="tole2dep" maxlength="3" size="3" />
+
+						<p:inputText value="#{cadastroJornadaBean.jornada.tols2ant}"
+							id="tols2ant" maxlength="3" size="3" />
+						<p:outputLabel value="S2" styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroJornadaBean.horIniS2}" id="s2"
+							onkeypress="Mascara_Hora(this.value,this)" size="5" lable="h04"
+							maxlength="5" style="text-align:center" />
+						<p:inputText value="#{cadastroJornadaBean.jornada.tols2dep}"
+							id="tols2dep" maxlength="3" size="3" />
+
+						<p:inputText value="#{cadastroJornadaBean.jornada.tole3ant}"
+							id="tole3ant" maxlength="3" size="3" />
+						<p:outputLabel value="E3" styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroJornadaBean.horIniE3}" id="e3"
+							onkeypress="Mascara_Hora(this.value,this)" size="5" lable="h05"
+							maxlength="5" style="text-align:center" />
+						<p:inputText value="#{cadastroJornadaBean.jornada.tole3dep}"
+							id="tole3dep" maxlength="3" size="3" />
+
+						<p:inputText value="#{cadastroJornadaBean.jornada.tols3ant}"
+							id="tols3ant" maxlength="3" size="3" />
+						<p:outputLabel value="S3" styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroJornadaBean.horIniS3}" id="s3"
+							onkeypress="Mascara_Hora(this.value,this)" size="5" lable="h06"
+							maxlength="5" style="text-align:center" />
+						<p:inputText value="#{cadastroJornadaBean.jornada.tols3dep}"
+							id="tols3dep" maxlength="3" size="3" />
+
+						<p:inputText value="#{cadastroJornadaBean.jornada.tole4ant}"
+							id="tole4ant" maxlength="3" size="3" />
+						<p:outputLabel value="E4" styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroJornadaBean.horIniE4}" id="e4"
+							onkeypress="Mascara_Hora(this.value,this)" size="5" lable="h07"
+							maxlength="5" style="text-align:center" />
+						<p:inputText value="#{cadastroJornadaBean.jornada.tole4dep}"
+							id="tole4dep" maxlength="3" size="3" />
+
+						<p:inputText value="#{cadastroJornadaBean.jornada.tols4ant}"
+							id="tols4ant" maxlength="3" size="3" />
+						<p:outputLabel value="S4" styleClass="rotuloCampo" />
+						<p:inputText value="#{cadastroJornadaBean.horIniS4}" id="s4"
+							onkeypress="Mascara_Hora(this.value,this)" size="5" lable="h08"
+							maxlength="5" style="text-align:center" />
+						<p:inputText value="#{cadastroJornadaBean.jornada.tols4dep}"
+							id="tols4dep" maxlength="3" size="3" />
+
+
+					</h:panelGrid>
+				</h:panelGroup>
+				<p:outputLabel value="Fechamento " styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroJornadaBean.fechamento}" id="fecha"
+					onkeypress="Mascara_Hora(this.value,this)" size="5" lable="Pre"
+					maxlength="5" style="text-align:center" />
+
+				<p:outputLabel value="Desconta intervalo 2 marcações "
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroJornadaBean.descontaIntervalo}"
+					id="desc" onkeypress="Mascara_Hora(this.value,this)" size="5"
+					lable="Desc" maxlength="5" style="text-align:center" />
+
+				<p:outputLabel value="DSR" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroJornadaBean.dsr}" id="dsr"
+					onkeypress="Mascara_Hora(this.value,this)" size="5" lable="DSR"
+					maxlength="5" style="text-align:center" required="true" requiredMessage="Informar o Desconto Semanal Remunerado" />
+
+
+			</p:panelGrid>
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

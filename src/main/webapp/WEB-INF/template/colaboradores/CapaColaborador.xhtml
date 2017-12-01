@@ -1,0 +1,218 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid columns="4" style="width: 100%; margin-top: 2px"
+		columnClasses="rotuloCadastro4 ,campoCadastro4, rotuloCadastro4, campoCadastro4">
+		<p:outputLabel value="Número" styleClass="rotuloCampo" />
+		<h:outputText value="#{cadastroColaborador.colaborador.id}" />
+
+		<p:outputLabel value="Data de criação" styleClass="rotuloCampo" />
+		<h:outputText value="#{cadastroColaborador.colaborador.dataAdmissao}">
+			<f:convertDateTime pattern="dd/MM/yyyy EEE - HH:MM:ss" />
+		</h:outputText>
+
+		<p:outputLabel value="Status" styleClass="rotuloCampo" />
+		<h:outputText
+			value="#{cadastroColaborador.demitido  ? 'Demitido' : 'Ativo'}"
+			style="color: #{cadastroColaborador.demitido  ? 'red' : 'green'};font-size:14px;font-weight:bold" />
+
+		<p:spacer />
+		<p:spacer />
+	</p:panelGrid>
+
+	<p:tabView>
+		<p:tab title="Ficha">
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 10px" columnClasses="rotulo, campo">
+
+
+				<p:outputLabel value="Nome" for="nome" styleClass="rotuloCampo"/>
+				<p:inputText id="nome"
+					value="#{cadastroColaborador.colaborador.nome}" size="80"
+					placeholder="Nome completo" required="true" requiredMessage="Nome completo obrigatório"/>
+
+				<p:outputLabel value="Data de nascimento" styleClass="rotuloCampo"
+					for="datanasc" />
+				<p:calendar id="datanasc" 
+					value="#{cadastroColaborador.colaborador.dataNasc}"
+					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
+					locale="pt" />
+			</p:panelGrid>
+
+			<p:fieldset id="endfield" legend="Endereço" toggleable="true"
+				collapsed="true">
+
+				<p:panelGrid columns="2"
+					columnClasses="rotulo campo" style="width: 98%">
+
+					<p:outputLabel value="Endereço" styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroColaborador.colaborador.endereco}"
+						size="80" />
+					<p:outputLabel value="Bairro" styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroColaborador.colaborador.bairro}"
+						size="25" />
+					<p:outputLabel value="Cidade" styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroColaborador.colaborador.cidade}"
+						size="25" />
+					<p:outputLabel value="UF" for="uf" styleClass="rotuloCampo" />
+					<p:selectOneMenu id="uf"
+						value="#{cadastroColaborador.colaborador.uf}" >
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{cadastroColaborador.uf}" var="uf"
+							itemValue="#{uf}" itemLabel="#{uf.descricao}" />
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="CEP" styleClass="rotuloCampo" />
+					<p:inputMask value="#{cadastroColaborador.colaborador.cep}"
+						size="10" mask="99999-999?9	" />
+				</p:panelGrid>
+			</p:fieldset>
+
+			<p:fieldset id="endfieldcontato" legend="Contato" toggleable="true"
+				collapsed="true">
+				<p:panelGrid columns="2"
+					columnClasses="rotulo campo" style="width: 100%">
+
+					<p:outputLabel value="Telefone" styleClass="rotuloCampo" />
+					<p:inputMask value="#{cadastroColaborador.colaborador.telefone}"
+						mask="999.9999.9999?9" />
+
+					<p:outputLabel value="Celular" styleClass="rotuloCampo" />
+					<p:inputMask value="#{cadastroColaborador.colaborador.celular}"
+						mask="999.99999.9999?9" />
+
+					<p:outputLabel value="Email interno" styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroColaborador.colaborador.email}"
+						size="150" />
+				</p:panelGrid>
+			</p:fieldset>
+		</p:tab>
+
+		<p:tab title="Documentação">
+			<p:panelGrid columns="2"
+				columnClasses="rotulo campo"
+				style="width: 98%;margin-left:15px">
+
+					<p:outputLabel value="PIS" styleClass="rotuloCampo" for="pis"/>
+					<p:inputMask value="#{cadastroColaborador.colaborador.pis}"
+						mask="99999999999?9" placeholder="digite sem os traços e pontos	"
+						required="true" requiredMessage="Numero do PIS obrigatório"  id="pis"/>
+
+					<p:outputLabel value="CPF" styleClass="rotuloCampo" />
+					<p:inputMask value="#{cadastroColaborador.colaborador.cpf}"
+						mask="999.999.999-99" />
+
+					<p:outputLabel value="RG" styleClass="rotuloCampo" />
+					<p:inputText value="#{cadastroColaborador.colaborador.rg}" />
+
+					<p:outputLabel value="CTPS" styleClass="rotuloCampo" for="ctps"/>
+					<p:inputText value="#{cadastroColaborador.colaborador.ctps}" required="true" id="ctps"/>
+
+					<p:outputLabel value="CTPS serie" styleClass="rotuloCampo" for="ctpsserie"/>
+					<p:inputText value="#{cadastroColaborador.colaborador.ctpsSerie}" id="ctpsserie" required="true" requiredMessage="ctps série obrigatória" />
+
+				</p:panelGrid>
+		</p:tab>
+		<p:tab title="Dado empresarial">
+			<p:panelGrid columns="2"
+				columnClasses="rotulo campo"
+				style="width: 98%;margin-left:15px">
+				
+				<p:outputLabel value="Matricula" styleClass="rotuloCampo"
+					for="matric" />
+				<p:inputText value="#{cadastroColaborador.colaborador.matricula}"
+					required="true" id="matric" requiredMessage="Número da matrícula obrigatório"/>
+
+				<p:outputLabel value="cartão" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroColaborador.colaborador.cartao}" />
+
+				<p:outputLabel value="Código folha" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroColaborador.colaborador.codigoFolha}"
+					placeholder="Usado pela folha de pagto" />
+
+				<p:outputLabel value="Data de admissão" styleClass="rotuloCampo"
+					for="dataadm" />
+				<p:calendar id="dataadm" required="true"
+					value="#{cadastroColaborador.colaborador.dataAdmissao}"
+					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
+					locale="pt"  requiredMessage="Data da admissão obrigatória"/>
+
+				<p:outputLabel value="Data de demissão" styleClass="rotuloCampo"
+					for="datademi" style="color:red" />
+				<p:calendar id="datademi" style="color:red"
+					value="#{cadastroColaborador.colaborador.dataDemissao}"
+					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
+					locale="pt" />
+
+				<p:outputLabel value="Empresa" for="empresa"
+					styleClass="rotuloCampo" />
+				<p:selectOneMenu id="empresa"  converter="#{empresaConverter}"
+					value="#{cadastroColaborador.colaborador.empresa}"
+					style="width:280px" required="true">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{cadastroColaborador.listaEmpresa}"
+						var="empresa" itemValue="#{empresa}"
+						itemLabel="#{empresa.razaoSocial}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Filial" for="filial" styleClass="rotuloCampo" />
+				<p:selectOneMenu id="filial" converter="#{filialConverter}"
+					value="#{cadastroColaborador.colaborador.filial}" 
+					style="width:280px" required="true" >
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{cadastroColaborador.listaFilial}"
+						var="filial" itemValue="#{filial}" itemLabel="#{filial.filial}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Depto" for="depto" styleClass="rotuloCampo" />
+				<p:selectOneMenu id="depto" converter="#{deptoConverter}"
+					value="#{cadastroColaborador.colaborador.depto}"
+					style="width:280px" required="true" >
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{cadastroColaborador.listaDepartamento}"
+						var="depto" itemValue="#{depto}" itemLabel="#{depto.depto}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Cargo" for="cargo" styleClass="rotuloCampo" />
+				<p:selectOneMenu id="cargo" converter="#{cargoConverter}"
+					value="#{cadastroColaborador.colaborador.cargo}"
+					style="width:280px" required="true" >
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{cadastroColaborador.listaCargo}"
+						var="cargo" itemValue="#{cargo}" itemLabel="#{cargo.cargo}" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Horista " styleClass="rotuloCampo" />
+				<p:selectBooleanCheckbox
+					value="#{cadastroColaborador.colaborador.horista}">
+				</p:selectBooleanCheckbox>
+
+				<p:outputLabel value="Vinculo" for="vinculo"
+					styleClass="rotuloCampo" />
+				<p:selectOneMenu id="vinculo" value="aaa" style="width:50%">
+					<f:selectItem itemLabel="Selecione" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+		</p:tab>
+		<p:tab title="parâmetros">
+			<p:panelGrid columns="2"
+				columnClasses="rotulo campo"
+				style="width: 98%;margin-left:15px">
+
+				<h:outputText value="Usa banco Horas	 " styleClass="rotuloCampo" />
+				<p:selectBooleanCheckbox
+					value="#{cadastroColaborador.colaborador.usaBanco}">
+				</p:selectBooleanCheckbox>
+			</p:panelGrid>
+		</p:tab>
+
+	</p:tabView>
+
+
+
+</ui:composition>

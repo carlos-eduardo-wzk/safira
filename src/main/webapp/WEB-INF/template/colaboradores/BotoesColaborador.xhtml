@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:messages autoUpdate="true" closable="true"  id="msgerr"  />   
+	
+	
+	<p:toolbar style="margin-top:1px">
+		<p:toolbarGroup>
+			<p:button value="Novo"
+				outcome="/admin/colaboradores/CadastroColaboradores" />
+			<p:commandButton value="Salvar"
+				action="#{cadastroColaborador.salvar}" />
+		</p:toolbarGroup>
+		<p:toolbarGroup align="right">
+
+			<p:commandButton type="button" value="Foto" disabled="#{cadastroColaborador.carregadoColaborador}"
+				onclick="PF('dlg').show()" icon="ui-icon-extlink" />
+			
+           
+			<p:toolbarGroup align="right">
+				<p:button value="Horário" 
+					outcome="/admin/horarioColaboradores/CadastroHorarioColaboradores" disabled="#{cadastroColaborador.carregadoColaborador}">					
+					<f:param name="colaborador"
+						value="#{cadastroColaborador.colaborador.id}" />
+				</p:button>
+			</p:toolbarGroup>
+
+			<p:toolbarGroup align="right">
+				<p:button value="Norma" 
+					outcome="/admin/normaColaboradores/CadastroNormaColaboradores" disabled="#{cadastroColaborador.carregadoColaborador}">					
+					<f:param name="colaborador"
+						value="#{cadastroColaborador.colaborador.id}" />
+				</p:button>
+			</p:toolbarGroup>
+
+			
+			<p:separator />
+
+			<p:commandButton value="Enviar" />
+			<p:separator />
+
+			<p:button value="Pesquisa"
+				outcome="/admin/colaboradores/PesquisaColaboradores" />
+
+		</p:toolbarGroup>
+	</p:toolbar>
+
+
+
+</ui:composition>

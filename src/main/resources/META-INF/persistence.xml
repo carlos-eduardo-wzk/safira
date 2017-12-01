@@ -15,7 +15,10 @@
         <class>model.Usuario</class>
         <class>model.Norma</class>
         <class>model.Ocorrencia</class>
-        
+        <class>model.Historico</class>
+        <class>model.Colaborador</class>
+        <class>model.Feriado</class>
+        <class>model.Log</class>
         
         
        

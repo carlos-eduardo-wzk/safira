@@ -73,7 +73,7 @@
 		<h:form style="display: inline-block">
 			<p:menubar styleClass="menu-sistema">
 				<p:submenu label="Cadastros">
-					<p:menuitem value="Colaboradores" />
+					<p:menuitem value="Colaboradores" outcome="/admin/colaboradores/PesquisaColaboradores" />
 					<p:separator />
 					<p:submenu label="Organização">
 						<p:menuitem value="Cargo" outcome="/admin/cargos/PesquisaCargos" />
@@ -83,8 +83,8 @@
 
 					</p:submenu>
 					<p:submenu label="Horário">
-						<p:menuitem value="Jornada" />
-						<p:menuitem value="Horário" />
+						<p:menuitem value="Jornada" outcome="/admin/jornadas/PesquisaJornadas" />
+						<p:menuitem value="Horário" outcome="/admin/gradeHorarios/PesquisaHorarios" />
 						<p:menuitem value="Banco de horas" />
 						<p:menuitem value="Horário avulso" />
 					</p:submenu>
@@ -92,7 +92,7 @@
 						<p:menuitem value="Feriado" />
 						<p:menuitem value="Motivo abono" />
 						<p:menuitem value="Motivo afastamento" />
-						<p:menuitem value="Histórico" />
+						<p:menuitem value="Histórico" outcome="/admin/historicos/PesquisaHistoricos" />
 						<p:menuitem value="Relógio" />
 
 					</p:submenu>

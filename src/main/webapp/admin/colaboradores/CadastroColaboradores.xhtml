@@ -1,0 +1,58 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroPedidoBean.editando ? "Edição de pedido" : "Novo pedido"}</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmCadastro">
+		
+		
+
+			<p:outputLabel
+				value="#{cadastroPedidoBean.editando ? 'Edição Colaborador' : 'Novo colaborador'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<f:metadata>
+				<o:viewParam name="colaborador"
+					value="#{cadastroColaborador.colaborador}" converter="#{colaboradorConverter}"  />
+				<f:event listener="#{cadastroColaborador.inicializar}"
+					type="preRenderView" />
+
+			</f:metadata>
+			
+
+			<ui:include
+				src="/WEB-INF/template/colaboradores/BotoesColaborador.xhtml" />
+
+			<ui:include
+				src="/WEB-INF/template/colaboradores/CapaColaborador.xhtml" />
+
+
+
+		</h:form>
+
+		<p:dialog header="Foto" widgetVar="dlg" modal="true" draggable="false"
+			resizable="false">
+
+			<h:form action="ImageServlet" method="get">
+
+				<p:fileUpload
+					fileUploadListener="#{cadastroColaborador.handleFileUpload}"
+					mode="advanced" dragDropSupport="false" update="messages"
+					sizeLimit="100000" fileLimit="3" label="Procurar..." auto="true"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+				<img jsf:value="/foto?img=#{cadastroColaborador.colaborador.pis}"
+					width="300" height="300" id="photo" />
+
+				<p:growl id="messages" showDetail="true" />
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

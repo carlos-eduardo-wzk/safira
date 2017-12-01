@@ -1,11 +1,13 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cargo implements Serializable {
@@ -45,6 +47,9 @@ public class Cargo implements Serializable {
 		this.cargo = cargo.toUpperCase();
 	}
 
+	@OneToMany(mappedBy="cargo")
+	private List<Colaborador> lstColaborador;
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

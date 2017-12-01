@@ -1,0 +1,131 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de Colaboradores</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+		
+			
+			<p:outputLabel value="Pesquisa de colaboradores"
+				style="font-weight:bold;font-size:16px	" />
+			<p:focus />
+			
+			<p:focus />
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 1px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" update="@form" 
+					title="pesquisa pelos campos abaixos preenchidos"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo"
+						outcome="/admin/colaboradores/CadastroColaboradores" 
+						title="tela de cadastramento"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="4" id="painel" cellpadding="5"
+				styleClass="panelGrid" style="margin-top :5px; width:500px" columnClasses="rotulo, campo">
+				
+				<p:outputLabel value="Nome" for="colaborador"
+					style="font-weight:bold;display:block" />
+				<p:inputText id="colaborador" size="60"
+					value="#{pesquisaColaboradorBean.filtro.nome}" />
+
+				<p:outputLabel value="Empresa" for="empresa"
+					style="font-weight:bold;text-align:right;display:block" />
+				<p:inputText id="empresa" size="60"
+					value="#{pesquisaColaboradorBean.filtro.empresa}" />
+
+				<p:outputLabel value="Filial" for="filial"
+					style="font-weight:bold;display:block" />
+				<p:inputText id="filial" size="60"
+					value="#{pesquisaColaboradorBean.filtro.flial}" />
+
+				<p:outputLabel value="Depto" for="depto"
+					style="font-weight:bold;text-align:right;display:block" />
+				<p:inputText id="depto" size="60"
+					value="#{pesquisaColaboradorBean.filtro.depto}" />
+
+				<p:outputLabel value="Data admissão" for="data"
+					style="font-weight:bold;display:block" />
+				<p:calendar id="data"
+					value="#{pesquisaColaboradorBean.filtro.dataAdm}"
+					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
+					locale="pt" />
+					
+				<p:outputLabel value="PIS" for="pis"
+					style="font-weight:bold;display:block;text-align:right" />
+				<p:inputText id="pis" size="60"
+					value="#{pesquisaColaboradorBean.filtro.pis}" />
+					
+
+			</p:panelGrid>
+
+			<p:dataTable id="colaboradoresTable"
+				value="#{pesquisaColaboradorBean.model}" var="colaborador"
+				style="margin-top: 10px"
+				emptyMessage="Nenhum colaborador encontrado." rows="15" lazy="true"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+
+				<p:column headerText="Colaborador" style="width:400px"
+					sortBy="#{colaborador.nome}">
+					<h:outputText value="#{colaborador.nome}" />
+				</p:column>
+
+				<p:column headerText="Empresa" sortBy="#{colaborador.empresa}">
+					<h:outputText value="#{colaborador.empresa.razaoSocial}" />
+				</p:column>
+
+				<p:column headerText="Filial" style="width:100px" sortBy="#{colaborador.filial}">
+					<h:outputText value="#{colaborador.filial.filial}" />
+				</p:column>
+
+				<p:column headerText="Depto" style="width:200px"
+					sortBy="#{colaborador.depto}">
+					<h:outputText value="#{colaborador.depto.depto}" />
+				</p:column>
+
+				<p:column headerText="Cargo" sortBy="#{colaborador.cargo}">
+					<h:outputText value="#{colaborador.cargo.cargo}" />
+				</p:column>
+
+
+				<p:column style="width: 100px; text-align: center" headerText="Ação">
+					<p:button outcome="/admin/colaboradores/CadastroColaboradores"
+						icon="ui-icon-pencil" title="Editar">
+						<f:param name="colaborador" value="#{colaborador.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaColaboradorBean.colaboradorSelecionado}"
+							value="#{colaborador}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de colaborador"
+				message="Tem certeza que deseja excluir o colaborador  #{pesquisaColaboradorBean.colaboradorSelecionado.nome}?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{pesquisaColaboradorBean.excluir}" process="@this"
+					update=":frmPesquisa:colaboradoresTable" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
