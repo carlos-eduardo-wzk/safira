@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+
+<h:head>
+
+</h:head>		
+<h:body>
+	<h:form>
+		
+		<h2 class="first">Teste cliente jersey</h2>
+           
+    
+
+
+       <p:commandButton value="Chamar recurdo" id="botao1" update="@form"
+						action="#{testeMB.recur()}" title="aaa"/>
+						
+       <p:commandButton value="Chamar recurdo control id" id="botao2" update="@form"
+						action="#{testeMB.recurID()}" title="bbb"/>
+						
+	  <p:commandButton value="List empregador" id="botao3" update="@form"
+						action="#{testeMB.recurEmpregador()}" title="empregador"  ajax="trues"/>
+											
+						
+       </h:form>
+</h:body>
+</html>  

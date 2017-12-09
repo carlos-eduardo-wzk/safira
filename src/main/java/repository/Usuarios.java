@@ -23,10 +23,8 @@ public class Usuarios implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-
 	@PersistenceContext(unitName = "safiraPU")
 	private EntityManager em;
-
 
 	public Usuario guardar(Usuario usuario) {
 		Session session = em.unwrap(Session.class);
@@ -39,13 +37,12 @@ public class Usuarios implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	
+
 	public List<Usuario> filtrados(UsuarioFilter filtro) {
 		Session session = em.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Usuario.class);
 		if (StringUtils.isNotBlank(filtro.getNome())) {
-			criteria.add(Restrictions.ilike("nome", filtro.getNome(),
-					MatchMode.ANYWHERE));
+			criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 		}
 		return criteria.addOrder(Order.asc("nome")).list();
 	}
@@ -55,11 +52,9 @@ public class Usuarios implements Serializable {
 		return (Usuario) session.get(Usuario.class, id);
 	}
 
-	
 	public void remover(Usuario usuario) {
-		
-		
-        System.out.println("remover usu " + usuario);
+
+		System.out.println("remover usu " + usuario);
 		Usuario usu = null;
 		usu = em.find(Usuario.class, usuario.getId());
 		em.remove(usu);
@@ -69,21 +64,18 @@ public class Usuarios implements Serializable {
 		Usuario usuario = null;
 		Session session = em.unwrap(Session.class);
 		try {
-			
-			usuario = (Usuario) session
-					.createQuery("from Usuario where lower(email) = :email")
-					.setParameter("email", email.toLowerCase())
-					.uniqueResult();
+
+			usuario = (Usuario) session.createQuery("from Usuario where lower(email) = :email")
+					.setParameter("email", email.toLowerCase()).uniqueResult();
 		} catch (NoResultException e) {
 			// nenhum encontado com email
 		}
 		return usuario;
 	}
 
-	public List<Usuario> vendedores() {		
+	public List<Usuario> vendedores() {
 		Session session = em.unwrap(Session.class);
-		return session.createQuery("from Usuario")
-				.list();
+		return session.createQuery("from Usuario").list();
 	}
 
 }

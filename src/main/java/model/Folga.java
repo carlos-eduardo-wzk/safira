@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Folga implements Serializable {
@@ -23,15 +25,23 @@ public class Folga implements Serializable {
 	@Column(name="data_afastamento_final")
 	private Date dataFolgaFim;
 
-	//@ManyToOne
-	//@JoinColumn(name = "colaborador_id", nullable = true)
-	//private Colaborador colaborador;
+	@ManyToOne
+	@JoinColumn(name = "colaborador_id", nullable = true)
+	private Colaborador colaborador;
 	
 	private String obs;
 
 	
 	
 	
+	public Colaborador getColaborador() {
+		return colaborador;
+	}
+
+	public void setColaborador(Colaborador colaborador) {
+		this.colaborador = colaborador;
+	}
+
 	public Date getDataFolgaIni() {
 		return dataFolgaIni;
 	}
@@ -57,13 +67,7 @@ public class Folga implements Serializable {
 	}
 
 
-//	public Colaborador getColaborador() {
-//		return colaborador;
-//	}
-//
-//	public void setColaborador(Colaborador colaborador) {
-//		this.colaborador = colaborador;
-//	}
+
 
 	public String getObs() {
 		return obs;
@@ -100,12 +104,11 @@ public class Folga implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Folga [Id=" + Id + ", dataFolgaIni=" + dataFolgaIni + ", dataFolgaFim=" + dataFolgaFim + ", obs=" + obs
-				+ "]";
+		return "Folga [Id=" + Id + ", dataFolgaIni=" + dataFolgaIni + ", dataFolgaFim=" + dataFolgaFim
+				+ ", colaborador=" + colaborador + ", obs=" + obs + "]";
 	}
 
-
-
+	
 			
 	
 }

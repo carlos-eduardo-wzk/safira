@@ -1,0 +1,106 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de folgas</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			
+			<p:outputLabel value="Pesquisa de folgas"
+				style="font-weight:bold;font-size:16px"
+				 />
+			
+			<p:focus />
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 1px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaFolgaBean.pesquisar}" update="@form" 
+						title="pesquisa pela folga"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo"
+						outcome="/admin/folgas/CadastroFolgas" title="tela de cadastramento" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 10px" columnClasses="rotulo, campo">
+           
+				<p:outputLabel value="Período inicial de" for="data"
+					styleClass="rotuloCampo" />
+				<h:panelGroup>	
+				<p:calendar id="data" size="10" pattern="dd/MM/yyyy" locale="pt" navigator="true" mode="popup"
+					value="#{pesquisaFolgaBean.filtro.dataini}" />
+
+				<p:outputLabel value=" até " for="dataf" 
+					styleClass="rotuloCampo" />
+				<p:calendar id="dataf" size="10" pattern="dd/MM/yyyy" locale="pt" navigator="true" mode="popup"
+					value="#{pesquisaFolgaBean.filtro.datafim}" />
+				</h:panelGroup>	
+
+				<p:outputLabel value="Colaborador" for="colaborador"
+					styleClass="rotuloCampo" />
+				<p:inputText id="colaborador" size="40"
+					value="#{pesquisaFolgaBean.filtro.colaborador}" />
+
+			</p:panelGrid>
+
+			<p:dataTable id="folgasTable"
+				value="#{pesquisaFolgaBean.folgaFiltrados}" var="folga"
+				style="margin-top: 10px"
+				emptyMessage="Nenhuma folga encontrado." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+
+				<p:column headerText="Data inicial" sortBy="#{folga.dataFolgaIni}">
+					<h:outputText value="#{folga.dataFolgaIni}">
+						<f:convertDateTime pattern="dd/MM/yyyy EEE" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Colaborador"
+					sortBy="#{folga.colaborador.nome}">
+					<h:outputText value="#{folga.colaborador.nome}">
+					</h:outputText>
+				</p:column>
+
+
+
+				<p:column style="width: 100px; text-align: center">
+					<p:button outcome="/admin/folgas/CadastroFolgas"
+						icon="ui-icon-pencil" title="Editar">
+						<f:param name="folga" value="#{folga.id}" />
+					</p:button>
+
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaFolgaBean.folgaSelecionado}"
+							value="#{folga}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de folga"
+				message="Tem certeza que deseja excluir a folga #{pesquisaFolgaBean.folgaSelecionado.colaborador.nome} ?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{pesquisaFolgaBean.excluir}" process="@this"
+					update=":frmPesquisa:folgasTable" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

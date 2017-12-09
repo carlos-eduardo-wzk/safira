@@ -1,0 +1,88 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{CadastroFeriadoBean.editando ? 'Edição folga' : 'Novo folga'} </ui:define>
+
+	<ui:define name="corpo">
+		<h:outputScript target="head" library="js" name="mascaraHora.js" />
+
+		<h:form id="frm">
+			<h1>#{cadastroFeriadoBean.editando ? 'Edição folga' : 'Nova
+				folga'}</h1>
+			<p:focus />
+
+			<f:metadata>
+				<o:viewParam name="folga" value="#{cadastroFolgaBean.folga}" converter="#{folgaConverter}" />
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo"
+						outcome="/admin/folgas/CadastroFolgas" />
+					<p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{cadastroFolgaBean.salvar}" 
+						title="grava o folga no banco de dados"/>
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/admin/folgas/PesquisaFolgas" title="volta para a tela de pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+			
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 1px"
+				columnClasses="rotulo campo">
+
+				<p:outputLabel value="Colaborador" for="colaborador"
+					styleClass="rotuloCampo" />					
+				<h:panelGroup>
+					<p:inputText
+						value="#{cadastroFolgaBean.folga.colaborador.nome}"
+						id="colaborador" maxlength="60" size="60"
+						placeholder="Nome do colaborador" readonly="true" required="true">
+						
+					</p:inputText>	
+
+					<p:commandButton icon="ui-icon-search" title="pesquisar"
+						process="@this" update="@none"
+						action="#{selecaoColaboradorBean.abrirDialogo}"
+						ignoreAutoUpdate="true">
+
+						<p:ajax event="dialogReturn"
+							listener="#{cadastroFolgaBean.colaboradorSelecionado}"
+							update="colaborador" ignoreAutoUpdate="true" />
+					</p:commandButton>
+				</h:panelGroup>
+
+				<p:outputLabel value="Data inicial" styleClass="rotuloCampo" for="dtinicial"/>
+				<p:calendar id="dtinicial" required="true"
+					value="#{cadastroFolgaBean.folga.dataFolgaIni}"
+					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
+					locale="pt" size="10"
+					requiredMessage="data inicial obrigatória" />
+
+				<p:outputLabel value="Data final" styleClass="rotuloCampo" />
+				<p:calendar id="dtfinal" required="true"
+					value="#{cadastroFolgaBean.folga.dataFolgaFim}"
+					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
+					locale="pt" size="10" 
+					requiredMessage="data final obrigatória" />
+
+				<p:outputLabel value="Observação" styleClass="rotuloCampo"  />
+				<p:inputTextarea id="obs" value="#{cadastroFolgaBean.folga.obs}"  cols="70" />
+				
+
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

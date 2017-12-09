@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import model.Horario;
 import model.Jornada;
@@ -17,7 +16,6 @@ public class CadastroHorarioService implements Serializable {
 	@Inject
 	private Horarios horarios;
 
-	@Transactional
 	public Horario salvar(Horario horario) {
 		return horarios.guardar(horario);
 	}

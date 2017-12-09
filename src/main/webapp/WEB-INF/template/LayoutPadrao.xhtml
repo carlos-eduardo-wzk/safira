@@ -86,14 +86,14 @@
 						<p:menuitem value="Jornada" outcome="/admin/jornadas/PesquisaJornadas" />
 						<p:menuitem value="Horário" outcome="/admin/gradeHorarios/PesquisaHorarios" />
 						<p:menuitem value="Banco de horas" />
-						<p:menuitem value="Horário avulso" />
+						<p:menuitem value="Horário avulso" outcome="/admin/horarioAvulsos/PesquisaHorarioAvulsos" />
 					</p:submenu>
 					<p:submenu label="Geral">
-						<p:menuitem value="Feriado" />
-						<p:menuitem value="Motivo abono" />
-						<p:menuitem value="Motivo afastamento" />
+						<p:menuitem value="Feriado" outcome="/admin/feriados/PesquisaFeriados"  />
+						<p:menuitem value="Motivo abono" outcome="/admin/motivoAbonos/PesquisaMotivoAbonos"  />
+						<p:menuitem value="Motivo afastamento" outcome="/admin/motivoAfastamentos/PesquisaMotivoAfastamentos"  />
 						<p:menuitem value="Histórico" outcome="/admin/historicos/PesquisaHistoricos" />
-						<p:menuitem value="Relógio" />
+						<p:menuitem value="Relógio" outcome="/admin/relogios/PesquisaRelogios" />
 
 					</p:submenu>
 					<p:submenu label="Sindicatos">
@@ -104,7 +104,7 @@
 
 					</p:submenu>
 					<p:submenu label="Importação">
-						<p:menuitem value="Colaborador" />
+						<p:menuitem value="Colaborador" outcome="/admin/importacaoColaborador/ImportacaoColaborador" />
 					</p:submenu>
 
 
@@ -117,7 +117,7 @@
 				<p:submenu label="Processamento">
 					<p:menuitem value="Acerto" />
 					<p:menuitem value="Afastamento" />
-					<p:menuitem value="Folga" />
+					<p:menuitem value="Folga" outcome="/admin/folgas/PesquisaFolgas"  />
 					<p:menuitem value="Importação AFD" />
 				</p:submenu>
 

@@ -1,6 +1,7 @@
 package repository;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -15,6 +16,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import filter.HorarioColaboradorFilter;
+import model.Feriado;
 import model.HorarioColaborador;
 import model.HorarioColaboradorPK;
 import service.NegocioException;
@@ -92,4 +94,16 @@ public class HorarioColaboradores implements Serializable {
 				.list();
 	}
 
+	
+	public HorarioColaborador porColaboradorHorario(Long colaid, Long horaid) {
+		Session session = em.unwrap(Session.class);
+		HorarioColaborador hc = (HorarioColaborador)
+				 session.createQuery("from HorarioColaborador where colaborador_id = :colaborador_id and horario_id=:horario_id")
+				.setParameter("colaborador_id", colaid)
+				.setParameter("horario_id", horaid).uniqueResult();
+		return hc;
+
+	}	
+	
+	
 }

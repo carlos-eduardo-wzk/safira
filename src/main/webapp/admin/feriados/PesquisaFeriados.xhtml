@@ -1,0 +1,104 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de feriados</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<p:outputLabel value="Pesquisa de feriados"
+				style="font-weight:bold;font-size:16px"
+				 />
+			<p:focus />
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 1px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaFeriadoBean.pesquisar}" update="@form" title="pesquisa pela nome do feriado"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/admin/feriados/CadastroFeriados" title="tela de cadastramento" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top:5px" columnClasses="rotulo, campo">
+				
+				<p:outputLabel value="Feriado" for="feriado" styleClass="rotuloCampo"/>
+				<p:inputText id="feriado" size="60"
+					value="#{pesquisaFeriadoBean.filtro.feriado}" 
+					placeholder="digite aqui o nome do feriado a ser pesquisado"/>
+					
+				<p:outputLabel value="Data" for="data" styleClass="rotuloCampo"/>
+				<p:calendar id="data" size="10" 
+				pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
+					locale="pt"
+					value="#{pesquisaFeriadoBean.filtro.datafer}" />
+					
+				<p:outputLabel value="Empresa" for="empresa" styleClass="rotuloCampo"/>
+				<p:inputText id="empresa" size="40"
+					value="#{pesquisaFeriadoBean.filtro.empresa}" />
+					
+					
+			</p:panelGrid>
+
+			<p:dataTable id="feriadosTable"
+				value="#{pesquisaFeriadoBean.feriadoFiltrados}" var="feriado"
+				style="margin-top: 10px" emptyMessage="Nenhum Feriado encontrado."
+				rows="20" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+
+				<p:column headerText="Feriado" sortBy="#{feriado.feriado}">
+					<h:outputText value="#{feriado.feriado}" />
+				</p:column>
+				
+				<p:column headerText="Data" sortBy="#{feriado.dataFeriado}">
+					<h:outputText value="#{feriado.dataFeriado}" >
+					<f:convertDateTime pattern="dd/MM/yyyy EEE"/>
+					</h:outputText>					
+				</p:column>
+				
+				
+				<p:column headerText="Empresa" sortBy="#{feriado.empresa.razaoSocial}">
+					<h:outputText value="#{feriado.empresa.razaoSocial}" >
+					</h:outputText>					
+				</p:column>
+				
+
+				<p:column style="width: 100px; text-align: center" headerText="Ação">
+					<p:button outcome="/admin/feriados/CadastroFeriados"
+						icon="ui-icon-pencil" title="Editar">
+						<f:param name="chave1" value="#{feriado.dataFeriado}" />
+						<f:param name="chave3" value="#{feriado.empresa.id}" />																
+					</p:button>
+
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaFeriadoBean.feriadoSelecionado}"
+							value="#{feriado}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de feriado"
+				message="Tem certeza que deseja excluir o feriado#{pesquisaFeriadoBean.feriadoSelecionado.feriado} ?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{pesquisaFeriadoBean.excluir}" process="@this"
+					update=":frmPesquisa:feriadosTable" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,89 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de relogios</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<p:outputLabel value="Pesquisa de relógios"
+				style="font-weight:bold;font-size:16px"
+				 />
+			<p:focus />
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 1px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaRelogioBean.pesquisar}" update="@form" title="pesquisa pela nome do relógio"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/admin/relogios/CadastroRelogios" title="tela de cadastramento" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 10px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Relógio descrição" for="relogio"
+					styleClass="rotuloCampo" />
+				<p:inputText id="relogio" size="60"
+					value="#{pesquisaRelogioBean.filtro.descricao}" placeholder="digite aqui o relógio que procura" />
+			</p:panelGrid>
+
+			<p:dataTable id="relogiosTable"
+				value="#{pesquisaRelogioBean.relogioFiltrados}" var="relogio"
+				style="margin-top: 10px" emptyMessage="Nenhum relógio encontrado."
+				rows="20" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+
+				<p:column headerText="Relogio">
+					<h:outputText value="#{relogio.descricao}" />
+				</p:column>
+				<p:column headerText="IP">
+					<h:outputText value="#{relogio.ip}" />
+				</p:column>
+
+				<p:column headerText="Numero serie">
+					<h:outputText value="#{relogio.numeroSerie}" />
+				</p:column>
+
+				<p:column headerText="Modelo">
+					<h:outputText value="#{relogio.modelo}" />
+				</p:column>
+
+				<p:column style="width: 100px; text-align: center" headerText="Ação">
+					<p:button outcome="/admin/relogios/CadastroRelogios"
+						icon="ui-icon-pencil" title="Editar">
+						<f:param name="relogio" value="#{relogio.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaRelogioBean.relogioSelecionado}" value="#{relogio}" />
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de relogio"
+				message="Tem certeza que deseja excluir o relogio ?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{pesquisaRelogioBean.excluir}" process="@this"
+					update=":frmPesquisa:relogiosTable" />
+			</p:confirmDialog>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

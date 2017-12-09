@@ -1,0 +1,184 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Importação colaborador</ui:define>
+
+	<ui:define name="corpo">
+
+		<style>
+.ui-wizard-step-title {
+	font-size: 16px;
+	margin: 0 3px 0 0;
+	padding: 0.4em;
+	float: left;
+}
+</style>
+
+		<p:focus />
+
+		<p:outputLabel value="Importação arquivo colaborador"
+			style="font-weight:bold;font-size:16px" />
+
+		<p:messages autoUpdate="true" closable="true" />
+
+		<h:form>
+			<p:wizard flowListener="#{importWizard.onFlowProcess}"
+				backLabel="Voltar" nextLabel="Avançar" style="margin-top:10px">
+				<p:tab id="personal" title="Passo 1">
+					<p:panel
+						header=" Escolha do Layout : CSV ou por posição dos campos ">
+
+						<p:panelGrid columns="2" columnClasses="rotulo, campo"
+							style="width: 100%">
+
+
+							<p:outputLabel
+								value="CSV (usar ordem dos campos abaixo seradado por virgula ?)"
+								styleClass="rotuloCampo" id="csv">
+								<p:tooltip id="toolTipCSV" for="csv"
+									value="Usa campos separador por virgula" />
+							</p:outputLabel>
+
+
+							<p:selectBooleanCheckbox value="#{uploadColaborador.csv}">
+								<p:ajax event="change" update="@form" />
+							</p:selectBooleanCheckbox>
+
+						</p:panelGrid>
+					</p:panel>
+					<p:spacer />
+
+					<p:panelGrid columns="3" style="margin-left:15px">
+
+						<p:outputLabel id="campo" value="CAMPO" style="font-weight:bold" />
+
+						<p:outputLabel id="posição" value="POSIÇÂO"
+							style="font-weight:bold;text-align:center"
+							title="posição incial do campo" />
+						<p:outputLabel id="tamanho" value="TAMANHO"
+							style="font-weight:bold" title="tamanho do campo" />
+
+						<p:outputLabel id="nome" value="Nome" size="4px"
+							style="font-weight:bold" />
+						<p:inputText value="#{uploadColaborador.posNome}" size="3"
+							maxlength="3" style="text-align:center" />
+						<p:inputText value="#{uploadColaborador.tamNome}" size="3"
+							maxlength="3" style="text-align:center" />
+
+						<p:outputLabel id="pis" value="PIS" size="4px"
+							style="font-weight:bold" />
+						<p:inputText value="#{uploadColaborador.posPIS}" size="3"
+							maxlength="3" style="text-align:center" />
+						<p:inputText value="#{uploadColaborador.tamPIS}" size="3"
+							maxlength="3" style="text-align:center" />
+
+						<p:outputLabel id="mat" value="Matricula" size="4px"
+							style="font-weight:bold" />
+						<p:inputText value="#{uploadColaborador.posMat}" size="3"
+							maxlength="3" style="text-align:center" />
+						<p:inputText value="#{uploadColaborador.tamMat}" size="3"
+							maxlength="3" style="text-align:center" />
+
+						<p:outputLabel id="ctps" value="CTPS" size="4px"
+							style="font-weight:bold" />
+						<p:inputText value="#{uploadColaborador.posCTPS}" size="3"
+							maxlength="3" style="text-align:center" />
+						<p:inputText value="#{uploadColaborador.tamCTPS}" size="3"
+							maxlength="3" style="text-align:center" />
+
+						<p:outputLabel id="ctpsSerie" value="CTPS Serie" size="4px"
+							style="font-weight:bold" />
+						<p:inputText value="#{uploadColaborador.posCTPSSerie}" size="3"
+							maxlength="3" style="text-align:center" />
+						<p:inputText value="#{uploadColaborador.tamCTPSSerie}" size="3"
+							maxlength="3" style="text-align:center" />
+
+						<p:outputLabel id="dataadm" value="Data Admissão  (ddMMaaaa)"
+							size="4px" style="font-weight:bold" />
+						<p:inputText value="#{uploadColaborador.posData}" size="3"
+							maxlength="3" style="text-align:center" />
+						<p:inputText value="#{uploadColaborador.tamData}" size="3"
+							maxlength="3" style="text-align:center" />
+
+					</p:panelGrid>
+
+				</p:tab>
+
+				<p:tab id="address" title="Passo 2">
+					<p:panel
+						header="escolha a empresa, filial a serem associadas aos colaboradores">
+
+						<h:panelGrid columns="2" columnClasses="label, value">
+							<p:outputLabel value="Empresa" for="empresa"
+								styleClass="rotuloCampo" />
+							<p:selectOneMenu id="empresa" converter="#{empresaConverter}"
+								value="#{uploadColaborador.empresaSelecionada}"
+								style="width:280px" required="true">
+								<f:selectItems value="#{uploadColaborador.listaEmpresa}"
+									var="empresa" itemValue="#{empresa}"
+									itemLabel="#{empresa.razaoSocial}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Filial" for="filial"
+								styleClass="rotuloCampo" />
+							<p:selectOneMenu id="filial"  converter="#{filialConverter}"
+								value="#{uploadColaborador.filialSelecionada}"
+								style="width:280px">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{uploadColaborador.listaFilial}"
+									var="filial" itemValue="#{filial}" itemLabel="#{filial.filial}" />
+							</p:selectOneMenu>
+
+
+							<p:outputLabel value="Depto" for="depto" styleClass="rotuloCampo" />
+							<p:selectOneMenu id="depto" converter="#{deptoConverter}"
+								value="#{uploadColaborador.deptoSelecionada}"
+								style="width:280px">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems value="#{uploadColaborador.listaDepto}"
+									var="depto" itemValue="#{depto}" itemLabel="#{depto.depto}" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</p:panel>
+
+				</p:tab>
+
+				<p:tab id="confirm" title="Passo 3">
+					<p:panel header="escolha o arquivo a ser importado">
+
+						<h:panelGrid columns="2" columnClasses="label, value">
+							<p:fileUpload mode="advanced"
+								fileUploadListener="#{uploadColaborador.handleFileUpload}"
+								allowTypes="/(\.|\/)(txt|csv)$/" auto="true"
+								uploadLabel="Selecine" cancelLabel="cancela"
+								label="clique aqui para selecionar o arquivo"
+								sizeLimit="1000000" fileLimit="3"
+								invalidSizeMessage="Tamanho do arquivo inválido"
+								oncomplete="PF('dlgLog').show();" update="dlg repe" />
+						</h:panelGrid>
+					</p:panel>
+
+				</p:tab>
+			</p:wizard>
+
+			<p:dialog id="dlg" header="Log da importação - Selecione com mouse para imprimir" widgetVar="dlgLog" modal="true"
+				width="45%" onShow="#{uploadColaborador.carregaLog()}"  >
+							
+							
+				<ui:repeat id="repe" value="#{uploadColaborador.listaLog}" varStatus="status" 
+					var="value">
+                      #{status.index + 1 }  #{value} <br />
+				</ui:repeat>
+			</p:dialog>
+		
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

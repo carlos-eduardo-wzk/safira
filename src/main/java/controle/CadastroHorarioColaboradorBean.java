@@ -36,6 +36,9 @@ public class CadastroHorarioColaboradorBean implements Serializable {
 	private Colaborador colaborador;
 
 	private HorarioColaborador horarioColaboradorSelecionado;
+	
+
+
 
 	@Inject
 	private CadastroHorarioColaboradorService cadastroHorarioColaboradorService;
@@ -44,15 +47,13 @@ public class CadastroHorarioColaboradorBean implements Serializable {
 		if (FacesUtil.isNotPostback()) {
 			listaHorario = carregarHorario();
 			horarioColaborador.setColaborador(this.colaborador);
-			System.out.println("inicializar CadastroHorarioColaboradorBean " + this.colaborador
-					.getId());
-			listaHorarioColaborador = carregarHorarioColaborador(this.colaborador
-					.getId());
+			System.out.println("inicializar CadastroHorarioColaboradorBean " + this.colaborador.getId());
+			listaHorarioColaborador = carregarHorarioColaborador(this.colaborador.getId());
 		}
 	}
 
 	public List<HorarioColaborador> carregarHorarioColaborador(Long id) {
-         System.out.println("aaaaaaaaaaaaaa");
+
 		return horarioColaboradores.carregarListaHorarioColaboradores(id);
 	}
 
@@ -65,10 +66,12 @@ public class CadastroHorarioColaboradorBean implements Serializable {
 	}
 
 	public HorarioColaborador getHorarioColaborador() {
+
 		return horarioColaborador;
 	}
 
 	public void setHorarioColaborador(HorarioColaborador horarioColaborador) {
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + horarioColaborador);
 		this.horarioColaborador = horarioColaborador;
 	}
 
@@ -110,6 +113,7 @@ public class CadastroHorarioColaboradorBean implements Serializable {
 	}
 
 	public void setListaHorarioColaborador(
+
 			List<HorarioColaborador> listaHorarioColaborador) {
 		this.listaHorarioColaborador = listaHorarioColaborador;
 	}
@@ -118,19 +122,18 @@ public class CadastroHorarioColaboradorBean implements Serializable {
 		return horarioColaboradorSelecionado;
 	}
 
-	public void setHorarioColaboradorSelecionado(
-			HorarioColaborador horarioColaboradorSelecionado) {
+	public void setHorarioColaboradorSelecionado(HorarioColaborador horarioColaboradorSelecionado) {
 		this.horarioColaboradorSelecionado = horarioColaboradorSelecionado;
 	}
 
 	public void excluir() {
-	 cadastroHorarioColaboradorService.excluir(horarioColaboradorSelecionado);
-	listaHorarioColaborador = carregarHorarioColaborador(this.colaborador.getId());
-	 
+		cadastroHorarioColaboradorService.excluir(horarioColaboradorSelecionado);
+		listaHorarioColaborador = carregarHorarioColaborador(this.colaborador.getId());
+
 	}
 
 	public void novo() {
-       this.horarioColaborador = new   HorarioColaborador();      
+		this.horarioColaborador = new HorarioColaborador();
 		listaHorario = carregarHorario();
 		horarioColaborador.setColaborador(this.colaborador);
 		listaHorarioColaborador = carregarHorarioColaborador(this.colaborador.getId());

@@ -1,0 +1,56 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">#{CadastroMotivoAbonoBean.editando ? 'Edição motivo abono' : 'Novo motivo abono'} </ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frm">
+			<p:outputLabel
+				value="#{CadastroMotivoAbonoBean.editando ? 'Edição motivo abono' : 'Novo motivo abono'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<p:focus />
+
+			<f:metadata>
+				<o:viewParam name="motivoAbono" converter="#{motivoAbonoConverter}"
+					value="#{cadastroMotivoAbonoBean.motivoAbono}" />
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo"
+						outcome="/admin/motivoAbonos/CadastroMotivoAbonos" />
+					<p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{cadastroMotivoAbonoBean.salvar}" title="grava o motivo no banco de dados" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/admin/motivoAbonos/PesquisaMotivoAbonos" 
+						title="volta para a tela de pesquisa"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+
+					<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 1px" columnClasses="rotulo, campo">
+				
+				
+				<p:outputLabel value="Nome do motivo de abono" for="motivoAbono"
+					styleClass="rotuloCampo" />
+				<p:inputText
+					value="#{cadastroMotivoAbonoBean.motivoAbono.motivoAbono}"
+					id="motivoAbono" maxlength="60" size="60" required="true" requiredMessage="Nome do motivo obrigatório"
+					placeholder="digite aqui o motivo de abono a ser cadastrado"/>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,100 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{CadastroRelogioBean.editando ? 'Edição relógio' : 'Novo relógio'}</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frm">
+
+			<p:focus />
+			<p:outputLabel
+				value="#{CadastroRelogioBean.editando ? 'Edição relógio' : 'Novo relógio'}"
+				style="font-weight:bold;font-size:16px	" />
+
+			<f:metadata>
+				<o:viewParam name="relogio" value="#{cadastroRelogioBean.relogio}" converter="#{relogioConverter}"  />
+			</f:metadata>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top:1px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/admin/relogios/CadastroRelogios" />
+					<p:commandButton value="Salvar" id="botaoSalvar" update="@form"
+						action="#{cadastroRelogioBean.salvar}"
+						title="grava o relógio no banco de dados" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/admin/relogios/PesquisaRelogios"
+						title="volta para a tela de pesquisa" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 1px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Descricao" for="descricao"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroRelogioBean.relogio.descricao}"
+					id="descricao" maxlength="60" size="60" required="true"
+					requiredMessage="Nome do relogio"
+					placeholder="digite nome que identifica o relógio dentro da empresa" />
+
+				<p:outputLabel value="Modelo" for="modelo" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroRelogioBean.relogio.modelo}"
+					id="modelo" maxlength="20" size="20" required="true"
+					requiredMessage="modelo obrigatório" />
+
+				<p:outputLabel value="Número serie" for="ns"
+					styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroRelogioBean.relogio.numeroSerie}"
+					id="ns" maxlength="20" size="20" required="true"
+					requiredMessage="numero serial obrigatório"
+					placeholder="numero de serie do relogio" />
+
+				<h:outputLabel for="mii" value="Tipo de comunicação" visible="true"
+					styleClass="rotuloCampo" />
+				<p:selectOneRadio id="mii"
+					value="#{cadastroRelogioBean.relogio.tipoComunicacao}">
+					<f:selectItem itemLabel="IP" itemValue="IP" />
+					<f:selectItem itemLabel="Pen driver" itemValue="PEN" />
+				</p:selectOneRadio>
+
+
+				<p:outputLabel value="IP / DNS" for="ip" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroRelogioBean.relogio.ip}" id="ip"
+					maxlength="20" size="20" required="true"
+					requiredMessage="ip ou dns obrigatório"
+					placeholder="IP ou nome dns" />
+
+				<p:outputLabel value="Porta" for="porta" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroRelogioBean.relogio.porta}" id="porta"
+					maxlength="10" size="10" required="true"
+					requiredMessage="porta de comunicação obrigatório" />
+
+				<p:outputLabel value="Local" for="local" styleClass="rotuloCampo" />
+				<p:inputText value="#{cadastroRelogioBean.relogio.local}" id="local"
+					maxlength="60" size="60" required="true" requiredMessage="Local" />
+
+				<p:outputLabel value="Empresa" for="empresa"
+					styleClass="rotuloCampo" />
+				<p:selectOneMenu id="empresa" converter="#{empresaConverter}"
+					value="#{cadastroRelogioBean.relogio.empresa}" style="width:280px">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{cadastroRelogioBean.listaEmpresa}"
+						var="empresa" itemValue="#{empresa}"
+						itemLabel="#{empresa.razaoSocial}" />
+				</p:selectOneMenu>
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

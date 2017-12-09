@@ -1,0 +1,116 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa de horário avulso</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			
+			<p:outputLabel value="Pesquisa do horário avulso"
+				style="font-weight:bold;font-size:16px"
+				 />
+			<p:focus />
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 1px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaHorarioAvulsoBean.pesquisar}" update="@form" 
+						title="pesquisa pelo nome do horário avulso"/>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo"
+						outcome="/admin/horarioAvulsos/CadastroHorarioAvulsos" title="tela de cadastramento"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 10px" columnClasses="rotulo, campo">
+           
+				<p:outputLabel value="Período de" for="data"
+					styleClass="rotuloCampo" />
+				<h:panelGroup>	
+				<p:calendar id="data" size="12" pattern="dd/MM/yyyy" locale="pt" navigator="true" mode="popup"
+					value="#{pesquisaHorarioAvulsoBean.filtro.dataini}" />
+
+				<p:outputLabel value=" até " for="dataf"
+					styleClass="rotuloCampo" />
+				<p:calendar id="dataf" size="10" pattern="dd/MM/yyyy" locale="pt" navigator="true" mode="popup"
+					value="#{pesquisaHorarioAvulsoBean.filtro.datafim}" />
+				</h:panelGroup>	
+
+				<p:outputLabel value="Colaborador" for="colaborador"
+					styleClass="rotuloCampo" />
+				<p:inputText id="colaborador" size="40"
+					value="#{pesquisaHorarioAvulsoBean.filtro.colaborador}" />
+
+				<p:outputLabel value="Horário" for="horario"
+					styleClass="rotuloCampo" />
+				<p:inputText id="horario" size="40"
+					value="#{pesquisaHorarioAvulsoBean.filtro.horario}" />
+
+
+			</p:panelGrid>
+
+			<p:dataTable id="horarioAvulsoTable"
+				value="#{pesquisaHorarioAvulsoBean.horarioAvulsoFiltrados}" var="ha"
+				style="margin-top: 10px"
+				emptyMessage="Nenhum horário avulso encontrado." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+
+
+				<p:column headerText="Horário">
+					<h:outputText value="#{ha.horario.horario}" />
+				</p:column>
+
+
+				<p:column headerText="Data inicial" sortBy="#{ha.dataHorarioIni}">
+					<h:outputText value="#{ha.dataHorarioIni}">
+						<f:convertDateTime pattern="dd/MM/yyyy EEE" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Colaborador"
+					sortBy="#{ha.colaborador.nome}">
+					<h:outputText value="#{ha.colaborador.nome}">
+					</h:outputText>
+				</p:column>
+
+
+
+				<p:column style="width: 100px; text-align: center">
+					<p:button outcome="/admin/horarioAvulsos/CadastroHorarioAvulsos"
+						icon="ui-icon-pencil" title="Editar">
+						<f:param name="horarioAvulso" value="#{ha.id}" />
+					</p:button>
+
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaHorarioAvulsoBean.horarioAvulsoSelecionado}"
+							value="#{ha}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de Horario Avulso "
+				message="Tem certeza que deseja excluir o afastamento #{pesquisaHorarioAvulsoBean.horarioAvulsoSelecionado.colaborador.nome} ?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{pesquisaHorarioAvulsoBean.excluir}" process="@this"
+					update=":frmPesquisa:horarioAvulsoTable" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

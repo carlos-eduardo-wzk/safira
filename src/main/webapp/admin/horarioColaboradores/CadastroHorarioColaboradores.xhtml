@@ -18,8 +18,11 @@
 			<p:focus />
 
 			<f:metadata>
-				<o:viewParam name="HorarioColaborador"
-					value="#{cadastroHorarioColaboradorBean.horarioColaborador}" />
+			  
+				<o:viewParam name="HorarioColaborador" converter="#{horarioColaboradorConverter}"
+					value="#{cadastroHorarioColaboradorBean.horarioColaborador}">				
+				</o:viewParam>
+
 				<o:viewParam name="colaborador" converter="#{colaboradorConverter}"
 					value="#{cadastroHorarioColaboradorBean.colaborador}" />
 				<f:event listener="#{cadastroHorarioColaboradorBean.inicializar}"
@@ -37,13 +40,14 @@
 					</p:commandButton>
 					<p:commandButton value="Salvar" id="botaoSalvar"
 						update="HorarioColaboradorTable"
-						action="#{cadastroHorarioColaboradorBean.salvar}" 
-						title="grava o horário atrelado ao colaborador no banco de dados"/>
+						action="#{cadastroHorarioColaboradorBean.salvar}"
+						title="grava o horário atrelado ao colaborador no banco de dados" />
 				</p:toolbarGroup>
 
 				<p:toolbarGroup align="right">
 					<p:button value="volta"
-						outcome="/admin/colaboradores/CadastroColaboradores" title="volta para a tela de pesquisa">
+						outcome="/admin/colaboradores/CadastroColaboradores"
+						title="volta para a tela de pesquisa">
 						<f:param name="colaborador"
 							value="#{cadastroHorarioColaboradorBean.colaborador.id}" />
 					</p:button>
@@ -53,8 +57,7 @@
 			</p:toolbar>
 			<br />
 
-			<p:panelGrid columns="2"
-				columnClasses="rotulo campo"
+			<p:panelGrid columns="2" columnClasses="rotulo campo"
 				style="width: 98%;margin-left:15px">
 
 				<p:outputLabel value="Colaborador" styleClass="rotuloCampo" />
@@ -63,7 +66,7 @@
 
 				<p:outputLabel value="Horário" for="horario"
 					styleClass="rotuloCampo" />
-				<p:selectOneMenu id="horario" converter="#{horarioConverter}"
+				<p:selectOneMenu id="horario" 
 					value="#{cadastroHorarioColaboradorBean.horarioColaborador.horario}"
 					style="width:280px" required="true">
 					<f:selectItem itemLabel="Selecione" />
@@ -72,17 +75,21 @@
 						var="horario" itemValue="#{horario}"
 						itemLabel="#{horario.horario}" />
 				</p:selectOneMenu>
-				<p:outputLabel value="Data inicio" styleClass="rotuloCampo"
-					for="dataini" />
-				<p:calendar id="dataini"
-					value="#{cadastroHorarioColaboradorBean.horarioColaborador.dataInicio}"
-					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup"
-					locale="pt" required="true" requiredMessage="Campo data obrigatório"/>
-				<p:outputLabel value="Motivo" styleClass="rotuloCampo" />
-				<p:inputText
-					value="#{cadastroHorarioColaboradorBean.horarioColaborador.motivo}" />
-			</p:panelGrid>
 
+<!-- 				<p:outputLabel value="Data inicio" styleClass="rotuloCampo" -->
+<!-- 					for="dataini" /> -->
+<!-- 				<p:calendar id="dataini" -->
+<!-- 					value="#{cadastroHorarioColaboradorBean.horarioColaborador.dataInicio}" -->
+<!-- 					pattern="dd/MM/yyyy EEE" navigator="true" pages="1" mode="popup" -->
+<!-- 					locale="pt" required="true" -->
+<!-- 					requiredMessage="Campo data obrigatório" /> -->
+
+<!-- 				<p:outputLabel value="Motivo" styleClass="rotuloCampo" /> -->
+<!-- 				<p:inputText -->
+<!-- 					value="#{cadastroHorarioColaboradorBean.horarioColaborador.motivo}" /> -->
+			</p:panelGrid>
+			
+			
 			<p:dataTable id="HorarioColaboradorTable"
 				value="#{cadastroHorarioColaboradorBean.listaHorarioColaborador}"
 				var="horcola" style="margin-top: 20px"
@@ -104,11 +111,17 @@
 
 
 				<p:column style="width: 100px; text-align: center" headerText="Açâo">
+
+
 					<p:commandButton icon="ui-icon-pencil" title="Editar" update=":frm">
 						<f:setPropertyActionListener
 							target="#{cadastroHorarioColaboradorBean.horarioColaborador}"
 							value="#{horcola}" />
+						
+							
 					</p:commandButton>
+
+					
 
 					<p:commandButton icon="ui-icon-trash" title="Excluir"
 						oncomplete="PF('confirmacaoExclusao').show()" process="@this"

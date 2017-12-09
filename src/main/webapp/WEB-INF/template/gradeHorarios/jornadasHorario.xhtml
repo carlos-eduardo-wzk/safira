@@ -16,7 +16,7 @@
 			<h:outputText value="#{hor.jornada}"
 				rendered="#{hor.jornada != null}" />
 
-			<p:autoComplete styleClass="produto-tabela" style="width: 99%"
+			<p:autoComplete styleClass="produto-tabela" style="width: 99%" converter="#{jornadaConverter}"
 				value="#{cadastroHorarioBean.jornadaLinhaEditavel}" var="jornada"
 				completeMethod="#{cadastroHorarioBean.completarJornada}"
 				itemLabel="#{jornada.jornada}" itemValue="#{jornada}"

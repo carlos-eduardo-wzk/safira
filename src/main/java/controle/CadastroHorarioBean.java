@@ -106,11 +106,12 @@ public class CadastroHorarioBean implements Serializable {
 
 		System.out.println("inicio apagar jornada ");
 		// apagar horario horarioJornada para inserir novalista
+		
 		cadastroServiceHorario.apagaJornadasHorario(this.getHorario().getId());
 
 		// incluir Horario_jornada
-		cadastroServiceHorario.insereJornadasHorario(this.getHorario().getId(),
-				lstJornada);
+	 cadastroServiceHorario.insereJornadasHorario(this.getHorario().getId(),
+	 		lstJornada);
 
 		// this.horario.adicionarJornadaVazia();
 		FacesUtil.addInfoMessage("Cadastrado com sucesso");
