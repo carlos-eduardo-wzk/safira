@@ -1,0 +1,48 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Relatório de abonos</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form id="frm">
+	    	<h1>Relatório de Abonos</h1>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 1px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Emitir" action="#{relatorioAbonosBean.emitirRelatorio}"
+	    				ajax="false" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 10px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Período" styleClass="rotuloCampo" />
+	    		<h:panelGroup>
+			    		<p:calendar value="#{relatorioAbonosBean.dataInicio}" label="Data inicial" 
+			    			pattern="dd/MM/yyyy" size="8" locale="pt" navigator="true" mode="popup"/>
+			    		<p:spacer width="8" />
+			    		<h:outputText value="a" />
+			    		<p:spacer width="8" />
+			    		<p:calendar value="#{relatorioAbonosBean.dataFim}" label="Data final"  
+			    			pattern="dd/MM/yyyy" size="8" locale="pt" navigator="true" mode="popup" />
+		    	</h:panelGroup>
+		    	
+		    	<p:outputLabel value="Empresa" styleClass="rotuloCampo" />
+		    	<p:inputText value="#{relatorioAbonosBean.empresa}" id="empresa" placeholder="digite parte do nome da empresa"/>
+		    	
+		    	<p:outputLabel value="Filial" styleClass="rotuloCampo" />
+		    	<p:inputText value="#{relatorioAbonosBean.filial}" id="filial" placeholder="digite parte do nome da filial"/>
+		    	
+		    	<p:outputLabel value="Depto"  styleClass="rotuloCampo" />
+		    	<p:inputText value="#{relatorioAbonosBean.depto}" id="depto" placeholder="digite parte do nome do depto"/>
+		    			    	
+	    	</p:panelGrid>
+    	</h:form>
+    </ui:define>
+</ui:composition>
